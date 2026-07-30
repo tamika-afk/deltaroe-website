@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Delta Roe — Website Takeover Guide</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: #2a2520; margin: 0; font-size: 13px; line-height: 1.6; }
+  .cover { background: #0C0A08; color: #f5efe3; padding: 60px 56px 44px; }
+  .cover .brand { font-size: 34px; letter-spacing: 8px; color: #C9A464; font-weight: normal; }
+  .cover .rule { width: 72px; border-top: 2px solid #C9A464; margin: 18px 0; }
+  .cover h1 { font-size: 24px; font-weight: normal; margin: 0 0 6px; color: #E6CD95; }
+  .cover .sub { color: #b3a98f; font-size: 13px; }
+  .page { padding: 30px 56px 40px; }
+  h2 { font-size: 17px; color: #0C0A08; border-bottom: 2px solid #C9A464; padding-bottom: 5px; margin: 30px 0 12px; font-weight: normal; letter-spacing: 1px; }
+  h3 { font-size: 13.5px; margin: 16px 0 6px; color: #6b5a36; letter-spacing: 0.5px; text-transform: uppercase; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; margin: 10px 0; }
+  th, td { border: 1px solid #d9d2c2; padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: #f4efe4; font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: #6b5a36; }
+  .tip { border-left: 3px solid #C9A464; background: #faf7f0; padding: 10px 16px; margin: 12px 0; font-style: italic; }
+  .say { background: #f4efe4; border: 1px solid #d9d2c2; border-radius: 6px; padding: 10px 14px; margin: 8px 0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; }
+  .say::before { content: "💬 Copy & paste this to Claude:"; display: block; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #6b5a36; margin-bottom: 4px; }
+  ul, ol { padding-left: 20px; } li { margin: 5px 0; }
+  .foot { margin-top: 34px; border-top: 1px solid #d9d2c2; padding-top: 10px; font-size: 10.5px; color: #8d8371; }
+  .pb { page-break-before: always; padding-top: 20px; }
+  .check td:first-child { width: 26px; text-align: center; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="brand">DELTA ROE</div>
+  <div class="rule"></div>
+  <h1>Website Takeover Guide</h1>
+  <div class="sub">deltaroe.com · prepared for Tamika Banks · July 2026 · v1</div>
+  <div style="margin-top:28px;color:#b3a98f;font-size:12.5px;max-width:540px;">
+    Everything you need to own and run your website yourself — with an AI assistant
+    named Claude doing all the technical work for you. No coding. No software to
+    install. If you can write a text message, you can run this site.
+  </div>
+</div>
+<div class="page">
+
+<h2>How this works — the one-minute version</h2>
+<p>Your website was built so that a person with zero technical background can run it.
+Here's the whole secret:</p>
+<ol>
+  <li>Your website's "recipe" (all its pages, words, prices, and the Roe chatbot's
+      brain) lives in one place online called <strong>GitHub</strong> — think of it as
+      the master document, with a complete history of every change ever made.</li>
+  <li>A service called <strong>Vercel</strong> reads that recipe and serves the live
+      website to the world, automatically, within about a minute of any change.</li>
+  <li><strong>Claude</strong> is an AI assistant that reads and edits the recipe
+      <em>for you</em>. You tell it what you want in plain English — "raise the sound
+      bath price to $130" — and it makes the change everywhere it needs to go, shows
+      you, and publishes it. It already knows every rule and detail of your site,
+      because we wrote all of that knowledge into the project itself.</li>
+</ol>
+<div class="tip">Nothing you or Claude do can permanently break the site. Every change
+is saved in history and can be undone, and if a change has an error in it, the live
+site simply stays on the previous version until it's fixed.</div>
+
+<p>This guide has three parts: <strong>A — set up your accounts</strong> (about an
+hour, one time), <strong>B — transfer day</strong> (Mike hands you the keys),
+<strong>C — daily life with Claude</strong> (the fun part).</p>
+
+<h2 class="pb">Part A · Set up your three accounts (one time, ~1 hour)</h2>
+<p>You'll create three free-to-start accounts. Use the same email for all three
+(we suggest tamika@deltaroe.com) and store each password somewhere safe — a
+password manager or a notebook that stays home. <strong>Never share passwords with
+anyone — including Claude. It will never ask for one; if anything ever does, stop.</strong></p>
+
+<h3>A1 · GitHub (where your website's recipe lives)</h3>
+<ol>
+  <li>Go to <strong>github.com</strong> → click <strong>Sign up</strong>.</li>
+  <li>Enter your email, create a password, pick a username (e.g. <em>tamika-deltaroe</em>).</li>
+  <li>Verify your email when GitHub sends the confirmation. The free plan is all you need.</li>
+</ol>
+
+<h3>A2 · Claude (your AI web assistant)</h3>
+<ol>
+  <li>Go to <strong>claude.ai</strong> → <strong>Sign up</strong> with the same email.</li>
+  <li>Subscribe to the <strong>Claude Pro</strong> plan (about $20/month — this is your
+      "web person" salary now, and it also gives you Claude for everyday business use:
+      writing emails, social posts, flyers, anything).</li>
+  <li>That's it. <strong>There is nothing to install.</strong> Claude works right in
+      your web browser (and the Claude phone app works too).</li>
+</ol>
+
+<h3>A3 · Vercel (the service that keeps the site online)</h3>
+<ol>
+  <li>Go to <strong>vercel.com</strong> → <strong>Sign up</strong> → choose
+      <strong>"Continue with GitHub"</strong> and log in with your new GitHub account.
+      (This links the two — that's the point.)</li>
+  <li>Stop there for now — the website gets connected on transfer day, below.</li>
+</ol>
+
+<table>
+  <tr><th>Account</th><th>What it is</th><th>Cost</th></tr>
+  <tr><td>GitHub</td><td>The master copy + full history of your website</td><td>Free</td></tr>
+  <tr><td>Claude Pro</td><td>Your AI assistant that does all technical work</td><td>~$20/mo</td></tr>
+  <tr><td>Vercel</td><td>Hosting — keeps deltaroe.com online worldwide</td><td>Free to start; Pro $20/mo for a business site</td></tr>
+</table>
+
+<h2 class="pb">Part B · Transfer day — Mike hands you the keys</h2>
+<p>Do this together on a call or in person; it takes about 30–45 minutes total.</p>
+<table class="check">
+  <tr><th></th><th>Step</th><th>Who</th><th>What happens</th></tr>
+  <tr><td>☐</td><td><strong>1. GitHub transfer.</strong> Mike opens the website project on GitHub → Settings → "Transfer ownership" → types your GitHub username.</td><td>Mike</td><td>You get an email from GitHub — <strong>click Accept within 24 hours.</strong> The master copy is now legally in your account.</td></tr>
+  <tr><td>☐</td><td><strong>2. Connect Vercel.</strong> In your Vercel account: <strong>Add New… → Project</strong> → pick <em>deltaroe-website</em> from your GitHub list → <strong>Import</strong> → <strong>Deploy</strong> (don't change any settings).</td><td>You (Mike guiding)</td><td>Vercel builds your own copy of the live site and gives it a web address. From now on, every published change goes live automatically.</td></tr>
+  <tr><td>☐</td><td><strong>3. Intake-form email.</strong> Create a free account at <strong>resend.com</strong>, then ask Claude (Part C) to walk you both through connecting it, so New Client intake forms arrive at Info@deltaroe.com from your own domain.</td><td>You + Claude</td><td>Until this is done the intake form still sends through Mike's interim sender — it works, but finish this step soon after transfer.</td></tr>
+  <tr><td>☐</td><td><strong>4. Point deltaroe.com at the new site.</strong> This is the "grand opening" switch — see the Launch Checklist (Part E). It can happen the same day or later, whenever you're ready to say goodbye to the old Wix site.</td><td>You + Claude + Mike</td><td>deltaroe.com starts showing the new site. Then cancel Wix. 🎉</td></tr>
+  <tr><td>☐</td><td><strong>5. Housekeeping.</strong> Mike removes his own access; you add him back only if you ever want help.</td><td>Mike</td><td>You now own 100% of the website.</td></tr>
+</table>
+<div class="tip">Already yours and unchanged by the transfer: the deltaroe.com domain,
+your email, Square, and (later) Shopify, Google Business Profile, and Google Analytics
+— those were always going to be in your name.</div>
+
+<h2 class="pb">Part C · Daily life with Claude — your new web person</h2>
+
+<h3>C1 · Opening the workshop</h3>
+<ol>
+  <li>Go to <strong>claude.ai/code</strong> in your browser (bookmark it).</li>
+  <li>First visit only: it will ask to connect to GitHub — click
+      <strong>Install the Claude GitHub App</strong> and approve. This is how Claude
+      reaches your website's recipe. If it shows an environment confirmation screen,
+      accept the default.</li>
+  <li>In the repository picker, choose <strong>deltaroe-website</strong>.</li>
+  <li>Type what you want, in plain English, and press Enter. That's the whole job.</li>
+</ol>
+
+<h3>C2 · How a change goes live (what you'll see)</h3>
+<ol>
+  <li>You describe the change. Claude edits the recipe in a safe workspace in the
+      cloud and shows you what it changed.</li>
+  <li>You click <strong>Create PR</strong> (a "pull request" — think: <em>a change
+      slip waiting for the owner's signature</em>).</li>
+  <li>On the GitHub page that opens, click <strong>Merge</strong>. That's your
+      signature. Vercel notices, rebuilds, and the change is live in about a minute.</li>
+  <li>Not sure about a change? Just don't merge it — the live site is untouched.
+      Merged something you regret? Tell Claude "undo my last change" and it will.</li>
+</ol>
+
+<h3>C3 · Your shortcut menu</h3>
+<p>Type <strong>/</strong> in the message box and ready-made routines we built for you
+appear:</p>
+<table>
+  <tr><th>Type this</th><th>What it does</th></tr>
+  <tr><td>/change-a-price</td><td>Changes a price everywhere it appears on the site (and reminds you to match it in Square)</td></tr>
+  <tr><td>/teach-roe</td><td>Teaches your chat bubble a new question &amp; answer, in your voice</td></tr>
+  <tr><td>/update-hours</td><td>Updates hours / phone / address across the whole site</td></tr>
+  <tr><td>/add-event</td><td>Adds a workshop, Sound of Paint night, or group sound bath to the Events page</td></tr>
+  <tr><td>/new-journal-post</td><td>Writes a journal article with you (great for showing up on Google)</td></tr>
+  <tr><td>/publish</td><td>Publishes pending work and double-checks it live</td></tr>
+  <tr><td>/site-checkup</td><td>Monthly health check of the whole site — run it the first of each month</td></tr>
+</table>
+
+<h3>C4 · The cookbook — things to say to Claude, word for word</h3>
+<div class="say">Raise the Sound Bath Immersion price to $130 everywhere it appears, and remind me what to change in Square.</div>
+<div class="say">A client asked Roe whether sound baths are safe during pregnancy and she didn't have a good answer. Teach her this: [type the answer the way you'd say it].</div>
+<div class="say">Add an event: Sound of Paint, Friday August 21 at 6:30pm, $55, at the studio. Painting + guided sound journey, all supplies included.</div>
+<div class="say">We're closed the week of Thanksgiving — put a gentle notice on the homepage and take it down after.</div>
+<div class="say">Write a journal post about how sound baths help with sleep. Show me the draft before publishing.</div>
+<div class="say">Change my Friday hours to 1pm–5pm everywhere.</div>
+<div class="say">Something looks wrong on the phone version of the services page — here's a screenshot. Please fix it.</div>
+<div class="say">Undo the last change we made.</div>
+<div class="say">Run a full site checkup and tell me in plain language what needs attention.</div>
+<div class="say">What questions has Roe been unable to answer lately? Let's teach her the top three.</div>
+<div class="tip">Claude already knows all the rules of your site — your brand colors,
+your voice, that prices must update in seven places at once, that imagery must be
+right, that wellness language stays honest. You never need to remember any of that;
+it's written into the project and Claude reads it every time.</div>
+
+<h3>C5 · Good to know</h3>
+<ul>
+  <li><strong>Usage limits:</strong> Claude Pro allows a generous number of messages
+      per 5-hour window. If you ever hit it, it just asks you to come back in a few
+      hours — nothing is lost. For a few website tweaks a week you will rarely notice.</li>
+  <li><strong>Phone:</strong> the Claude app on your phone can do all of this too.</li>
+  <li><strong>Closing the tab is fine</strong> — Claude keeps working in the cloud and
+      the session is right there when you come back.</li>
+</ul>
+
+<h2 class="pb">Part D · The rules your website lives by</h2>
+<p>These are already built into the project (Claude enforces them) — listed here so
+you know your own house rules:</p>
+<ul>
+  <li><strong>Imagery:</strong> no stock photos of faces, ever — nothing that
+      misrepresents you. Hands-only stock is fine. The best future upgrade is a real
+      photo shoot of you in the studio.</li>
+  <li><strong>Voice:</strong> warm, direct, empowering — your voice. Visitors are
+      addressed gender-neutrally ("friend"), because your clients include men. Your
+      book titles (<em>FLY Queen</em>) always stay as titles.</li>
+  <li><strong>Colors:</strong> midnight black + antique gold + champagne. Chakra
+      colors appear only where they mean something (the chakra page, The Clearing,
+      Sound of Paint).</li>
+  <li><strong>Honesty:</strong> everything is "complementary wellness," never a
+      substitute for medical care. No medical claims, ever.</li>
+  <li><strong>Prices update everywhere at once</strong> — pages, FAQ, Roe, and the
+      summary that AI search engines read. Claude handles this automatically.</li>
+  <li><strong>Roe can never go rogue:</strong> she only says what's been written for
+      her, and she costs $0 to run.</li>
+</ul>
+
+<h2>Part E · Launch checklist (from Wix to your new site)</h2>
+<p>In order, whenever you're ready — ask Claude to help with every step:</p>
+<ol>
+  <li><strong>Square Appointments:</strong> set up your services, prices, deposits,
+      gift cards, and memberships in Square (Mike's Owner's Manual §2 covers daily
+      use). Then tell Claude: <em>"Square is ready — switch all the Book buttons from
+      Wix to my Square booking page: [paste your Square booking link]."</em></li>
+  <li><strong>Save anything you love from the old Wix site</strong> — it disappears
+      at cutover. (Ask Claude to help capture it.)</li>
+  <li><strong>Point deltaroe.com at Vercel:</strong> in Vercel → your project →
+      Settings → Domains → add deltaroe.com; it shows you exactly what to change
+      where your domain is managed. Claude can walk you through it click by click.</li>
+  <li><strong>Google:</strong> update your Google Business Profile website link;
+      finish GBP verification; click "Ask for reviews" there and give Claude the
+      review link — it wires up the site's review funnel. Ask Claude to set up
+      Google Analytics + Search Console (both free).</li>
+  <li><strong>Cancel Wix.</strong> 🎉</li>
+</ol>
+
+<h2>Part F · The Apothecary shop (when you're ready — separate project)</h2>
+<p>The shop page is currently a preview. The plan, fully researched: a Shopify store
+(~$29–39/mo) where suppliers make and ship everything under the Delta Roe label — you
+never touch inventory. Chosen suppliers: <strong>Candle Builders</strong> (candles),
+<strong>Blanka</strong> (body &amp; massage oils), <strong>Enchanted Soul</strong>
+(crystals, sage, ritual kits), <strong>Printful</strong> (apparel). First step when
+ready: order samples (1–3 weeks), approve what you love, then open in ~4–6 weeks.
+Claude knows the whole plan — just say <em>"let's start the Apothecary."</em></p>
+
+<h2>Part G · Money, safety, and when to call for help</h2>
+<table>
+  <tr><th>Monthly cost</th><th>Amount</th></tr>
+  <tr><td>Claude Pro (your web assistant)</td><td>~$20</td></tr>
+  <tr><td>Vercel hosting</td><td>$20 (Pro)</td></tr>
+  <tr><td>deltaroe.com domain</td><td>~$15–20/yr (already yours)</td></tr>
+  <tr><td>Square / Google tools</td><td>Free (+card fees on sales)</td></tr>
+  <tr><td>Shopify — only when the shop opens</td><td>~$29–39</td></tr>
+  <tr><td><strong>Total at takeover</strong></td><td><strong>~$40/mo</strong> (~$70–80 once the shop opens)</td></tr>
+</table>
+<ul>
+  <li><strong>Passwords:</strong> never share them — not with Claude, not with anyone
+      who emails or calls claiming to "help with the website."</li>
+  <li><strong>Every change is reversible.</strong> "Undo the last change" always works.</li>
+  <li><strong>If the site ever looks broken:</strong> don't panic — tell Claude, with
+      a screenshot if you can. It can also roll the site back to any earlier version.</li>
+  <li><strong>First of the month:</strong> type <strong>/site-checkup</strong>. Two
+      minutes of reading keeps everything healthy.</li>
+  <li><strong>Mike remains a phone call away</strong> for anything weird — but the
+      goal of this packet is that you won't need it.</li>
+</ul>
+
+<div class="foot">Delta Roe Website Takeover Guide v1 · July 2026 · Companion documents in the same folder:
+Owner's Manual v1 (day-to-day Square/Shopify), GBP kit, review card &amp; reply templates.
+The technical knowledge base Claude reads lives in the project as CLAUDE.md.</div>
+</div>
+</body>
+</html>

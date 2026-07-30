@@ -1,42 +1,171 @@
-# Delta Roe Website
+# Delta Roe Website — Complete Project Knowledge
 
-Luxury black+gold Next.js site for **Delta Roe** — Tamika Banks' reiki / sound bath / chakra / life-coaching studio at 9075 Elk Grove Blvd, Suite 220A, Elk Grove CA 95624 (historic Old Town).
+Luxury black+gold Next.js site for **Delta Roe** — Tamika Banks' reiki / sound bath /
+chakra / life-coaching studio at 9075 Elk Grove Blvd, Suite 220A, Elk Grove CA 95624
+(historic Old Town). This file is the complete, self-contained knowledge base for the
+project: every rule, decision, and piece of context lives here so ANY Claude session —
+on any machine — can maintain the site correctly.
 
-- **Live:** https://deltaroe-website.vercel.app (push to `main` auto-deploys via Vercel)
-- **Domain:** deltaroe.com still points at the old Wix site until cutover; booking CTAs link to the existing Wix scheduler (deltaroe.com/book-online) until Square Appointments is set up
-- **Plan:** `docs/upgrade-plan.html` / `docs/Delta-Roe-Website-Plan.pdf`
-- **Dev:** `npm run dev`
+## Who you are working for
+
+The site owner is **Tamika Banks** (tamika@deltaroe.com). She is the founder, a
+Certified Reiki Master & Empowerment Life Coach, and she may have little or no
+technical experience. When working with her:
+
+- Explain everything in plain language — no jargon, no assumed git/terminal knowledge.
+- Do the technical work yourself end-to-end (edit → check → commit → push → verify
+  live). Never hand her a manual technical step if you can do it for her.
+- Confirm before anything destructive or hard to undo. Small content edits: just do
+  them and show her the result.
+- Never ask her for passwords, API keys, or payment details, and never display secret
+  values back in chat.
+- Every change is reversible — the site keeps full git history. If something breaks,
+  reassure her and revert.
+- The step-by-step owner documentation lives in `docs/` (Owner's Manual + Takeover
+  Guide). Keep those documents updated when anything they describe changes.
+
+## Live URLs & deploy model
+
+- **Live site:** https://deltaroe-website.vercel.app — pushing to `main` on GitHub
+  auto-deploys via Vercel (about 1–2 minutes).
+- **deltaroe.com** still points at the old Wix site until the DNS cutover (see Launch
+  checklist below). Until then, verify all work on the vercel.app URL.
+- Booking CTAs point at the existing Wix scheduler (`https://www.deltaroe.com/book-online`)
+  until Square Appointments is set up — the URL lives in `lib/site.ts` (`bookingUrl`).
+- Publishing a change = commit + push to `main`, then verify the live page after the
+  deploy finishes. If the deploy fails, the site stays on the previous version (safe).
 
 ## Architecture
 
-Next.js 15 App Router, hand-rolled CSS (no Tailwind), all pages static. Content lives in data files:
+Next.js 15 App Router, hand-rolled CSS (**no Tailwind — never add it**), all pages
+static. Content lives in data files — most requests are edits to these:
 
-- `lib/site.ts` — business facts (address, phone, hours, booking URL)
-- `lib/services.ts` — the 5 service landing pages (`/services/[slug]`), incl. prices & FAQs
-- `lib/products.ts` — Apothecary demo-store SKUs (shop is preview-only, noindex, demo cart)
-- `lib/faqs.ts` — 36-question FAQ (FAQPage schema)
-- `lib/roe-kb.ts` — "Roe" chatbot knowledge base
-- `public/llms.txt` — AI-search business summary (keep in sync with pricing changes)
+| File | What it controls |
+|---|---|
+| `lib/site.ts` | Business facts: address, phone, email, hours, booking URL, nav, review link |
+| `lib/services.ts` | The 10 service pages (`/services/[slug]`), prices, descriptions, per-service FAQs |
+| `lib/products.ts` | Apothecary demo-store SKUs (shop is preview-only, noindex, demo cart) |
+| `lib/faqs.ts` | 36-question FAQ page (FAQPage schema) |
+| `lib/roe-kb.ts` | "Roe" chatbot knowledge base (client-side retrieval — zero API cost) |
+| `lib/journal.ts` | Journal articles |
+| `lib/chakras.ts` | Chakra data for the sound-chakras page |
+| `lib/bowl-audio.ts` | Shared bowl/glass audio synthesis — used by BOTH `/sound-chakras` and `/the-clearing`; test both pages after touching it |
+| `public/llms.txt` | AI-search business summary — keep in sync with any pricing/service/membership change |
+| `app/api/intake/route.ts` | New-client intake form email delivery (Resend) |
+| `app/api/chat-log/route.ts` | Roe chat logging; MISS lines = questions Roe couldn't answer = training backlog |
 
 ## Non-negotiable rules
 
-1. **Tamika is African American.** Never use stock imagery with visible skin that misrepresents her. No stock faces at all — hands-only imagery is OK (current about.jpg = Black woman's hands with candle).
-2. **Brand voice** (Roe chatbot, copy): warm big-sister/queen energy, direct, empowering — modeled on Tamika's books *FLY Queen: First Love Yourself* (F.L.Y. = First Love Yourself) and *The Last Greyhound*. Every answer points gently toward self-care and booking.
-3. **Chakra colors are ceremonial** — they appear only where they mean something (chakra page, Sound of Paint, bracelet art). Everywhere else: midnight black `#0C0A08`, antique gold `#C9A464`, champagne `#E6CD95`, cream text.
-4. Reiki/energy claims stay honest: complementary wellness, never a substitute for medical care.
-5. **Don't run `npm run build` while the dev server is running** — it corrupts `.next` (fix: stop server, `rm -rf .next`, restart).
+1. **Tamika is African American.** Never use stock imagery with visible skin that
+   misrepresents her. No stock faces at all — hands-only imagery is OK (current
+   about.jpg = a Black woman's hands with candle, Pexels). Photos: Pexels (free
+   commercial license, no attribution).
+2. **Gender-neutral visitor address (ruling 7/20/2026 — supersedes earlier "queen"
+   addressing):** clients include men. Never call the visitor "queen"; the approved
+   endearment is **"friend."** References to Tamika's book *FLY Queen: First Love
+   Yourself* stay (it's a title, not an address). Voice remains warm, direct,
+   empowering — modeled on her books *FLY Queen* and *The Last Greyhound*. Every Roe
+   answer points gently toward self-care and booking.
+3. **Chakra colors are ceremonial** — they appear only where they mean something
+   (chakra page, The Clearing, Sound of Paint, bracelet art). Everywhere else:
+   midnight black `#0C0A08`, antique gold `#C9A464`, champagne `#E6CD95`, cream text.
+4. **Honest wellness language everywhere:** reiki/energy/sound work is complementary
+   wellness, never a substitute for medical care. Keep the not-therapy framing and the
+   988 crisis line in the intake. Never add medical claims.
+5. **Services are always sorted lowest → highest price** (enforced in `lib/services.ts`).
+6. **After ANY edit to `lib/services.ts`, `lib/faqs.ts`, or `lib/roe-kb.ts`, run
+   `npx tsx scripts/roe-kb-check.mts`** (also `npm run kb:check`). It is a prebuild
+   gate — if it fails, the Vercel deploy fails. Fix coverage before pushing.
+7. **Pricing/membership changes must be updated everywhere at once:** the service or
+   program page, `lib/services.ts`, memberships page, homepage mentions, `lib/faqs.ts`,
+   `lib/roe-kb.ts`, and `public/llms.txt`. (Precedent: the 7/21 Soulful Journey
+   revision touched 7 places.)
+8. **Don't run `npm run build` while the dev server is running** — it corrupts
+   `.next` (fix: stop server, delete `.next`, restart). Local dev port is **3210**
+   (`.claude/launch.json`, `deltaroe-dev`). Local preview is optional — Vercel
+   deploys are the source of truth for verification.
+
+## Business facts (mirror of lib/site.ts — that file is authoritative)
+
+Phone (916) 206-1752 · Info@deltaroe.com · Hours: Mon–Wed 9–9, Thu 9–5, Fri 1–3,
+Sat 11–3, Sun closed. Founder: Tamika Banks. Programs: Sanctuary Circle $33/mo
+(virtual), Ritual Membership $129/mo (studio), Soulful Journey $399/mo.
+
+**Soulful Journey (revised to Tamika's spec 7/21/2026):** $399/mo = 3 private 30-min
+sessions (coaching or wellness) + personalized monthly wellness plan + guided journal +
+full premium library + priority messaging (business hours) + 15% off + early access.
+12-month container framing + optional $399 Roadmap intensive stay. Do NOT re-add the
+removed items (master classes, 4th session, bi-weekly coaching, quarterly panels).
+
+## The interactive pieces
+
+- **Roe (chat bubble):** client-side retrieval from `lib/roe-kb.ts` — not connected to
+  any AI service, can never go off-script, costs $0. Teach her new answers by adding
+  KB entries; check `/api/chat-log` MISS lines for questions she couldn't answer.
+- **/sound-chakras:** modal bowl-synthesis audio (real crystal-bowl physics), lotus
+  chakra symbols (shared component), 10s cycle, "Hear your chakras" button.
+- **/the-clearing:** therapeutic mini-game — 7 rounds root→crown, shatter dark
+  word-shards, gather golden word-motes into a singing bowl, chain-break finale with
+  ascending chakra tones. No timer, no score, nothing ever lost. Reduced-motion +
+  keyboard accessible. Uses "friend" endearment.
+- **/intake:** 5-step new-client form → `/api/intake` → email to Info@deltaroe.com via
+  Resend (`RESEND_API_KEY` env var in Vercel). Reply-to = the client; ⚠ in the subject
+  when safety flags are checked. Includes consent/scope/cancellation/18+/e-signature
+  clauses and points at the live menu instead of hard-coding fees. There is also a
+  print-blank version for the studio clipboard.
+  **Handover item:** the sender is currently the interim
+  `web@send.robbjack.com` (hard-coded in `app/api/intake/route.ts`); at handover,
+  switch to Tamika's own Resend account + a verified deltaroe.com sending domain.
+
+## Launch checklist (state as of late July 2026)
+
+Waiting on Tamika's sign-off: prices, product names, membership tiers, Roe voice,
+chakra page, "The Delta Roe Method" framing (invented — needs her blessing), plus the
+delivered requests (The Clearing, intake, Soulful Journey revision).
+
+After sign-off, in order:
+1. **Square Appointments** setup (booking, deposits, gift cards, memberships).
+2. Swap `bookingUrl` in `lib/site.ts` from the Wix scheduler to Square.
+3. **DNS cutover** deltaroe.com → Vercel. Capture/save the legacy Wix pages FIRST —
+   they die at cutover.
+4. **Google Business Profile**: flip website link, finish verification, get the real
+   review short-link ("Ask for reviews" in GBP) and put it in `REVIEW_URL` in
+   `lib/site.ts` (currently a REPLACE_ME placeholder; see `docs/gbp-kit.md` §8).
+   Add GA4 (`NEXT_PUBLIC_GA_ID`) + Search Console. Vercel Web Analytics already live.
+5. Cancel Wix. 🎉
+
+**Review engine already built:** `/review` funnel page, `docs/gbp-kit.md`, printable
+review card (`docs/review-card.html`), reply templates (`docs/review-templates.md`).
+
+## The Apothecary shop (separate track, ~4–6 weeks, independent of launch)
+
+Shop page is currently a noindex demo. Real store = **Shopify Basic** with a verified
+zero-inventory private-label vendor stack (researched July 2026):
+- **Candle Builders** — private-label candles, $0 fees (Shopify)
+- **Blanka** — private-label body/massage oils, zero MOQ
+- **Enchanted Soul** — crystals/sage/ritual kits, blind dropship (Shopify Collective)
+- **Printful** — apparel on Bella+Canvas/AS Colour
+- Add-ons: Dripshipper (private-label tea), Faire (net-60 wholesale), Get Grounded
+  Shop affiliate. Grounding footwear = affiliate only (no wholesale programs exist).
+Sequence: order samples (1–3 wk lead) → Tamika approves → Shopify + vendors → open.
+
+## Running costs (told to Tamika)
+
+~$21/mo at launch (Vercel Pro $20 + domain ~$15–20/yr) · ~$55–65/mo once the shop
+opens (+ card fees on sales). Roe chatbot / databases / storage: $0.
+
+## Handover / ownership
+
+Ownership transfers to Tamika's own accounts: GitHub repo, Vercel project, Resend
+(intake email), Square, Shopify, GBP, GA4. The full non-technical instructions are in
+**`docs/Delta-Roe-Takeover-Guide.html`** (+ Owner's Manual v1 in the same folder).
+Ready-made task commands for the most common jobs live in `.claude/commands/`
+(type `/` in Claude Code to see them).
 
 ## Assets
 
-- Logo source: `F:\Dropbox\deltaroelogo.PNG`; crops in `public/`: `emblem.png` (square, no wordmark), `emblem-transparent.png`, `logo.png` (full)
-- Product-label compositing script pattern: PowerShell GDI+ (PS 5.1 needs `[single]` casts on Font/RectangleF constructors)
-- Photos: Pexels (free commercial license, no attribution)
-- `public/audio/sound-bath-sample.mp3`: synthesized 60s 432 Hz binaural bowls (numpy + ffmpeg)
-
-## Roadmap (next)
-
-1. Show Tamika; collect feedback on prices/product names/membership tiers
-2. Google Business Profile overhaul + review-request engine
-3. Square Appointments (booking, deposits, gift cards, memberships)
-4. Shopify + vendor stack: Candle Builders (candles), Blanka (oils), Enchanted Soul (crystals/sage), Printful (apparel) — all zero-inventory private label
-5. Point deltaroe.com at Vercel when approved
+- Logo source: `deltaroelogo.PNG`; crops in `public/`: `emblem.png` (square, no
+  wordmark), `emblem-transparent.png`, `logo.png` (full).
+- `public/audio/sound-bath-sample.mp3`: synthesized 60s 432 Hz binaural bowls.
+- Product-label compositing was done with PowerShell GDI+ (PS 5.1 needs `[single]`
+  casts on Font/RectangleF constructors) — only relevant if remaking labels.
