@@ -17,7 +17,7 @@ their body. One follow-up a week later if they haven't clicked — then stop.
 
 ## Email — Variant A (same evening / next morning)
 
-**Subject:** How do you feel, queen?
+**Subject:** How do you feel today?
 
 > Hi [First name],
 >
@@ -65,7 +65,7 @@ their body. One follow-up a week later if they haven't clicked — then stop.
 > Hi [First name], it's Tamika at Delta Roe 🕯️ Thank you for letting me hold
 > space for you today. If the session gave you what you needed, a one-sentence
 > review helps another soul find the studio: [REVIEW-LINK] — and if anything
-> felt off, just text me back instead. First love yourself. 👑
+> felt off, just text me back instead. First love yourself. 💛
 
 ## SMS — Variant B (short + sweet, next day)
 
@@ -84,7 +84,7 @@ the boundary of what's public), and never argue.
 
 ### 5-star reply — Variant A
 
-> Thank you, [First name] 👑 It was an honor to hold that space for you. What
+> Thank you, [First name] 💛 It was an honor to hold that space for you. What
 > you felt in the room, you carry with you — come back anytime your energy asks
 > for it. First love yourself. — Tamika, Delta Roe
 

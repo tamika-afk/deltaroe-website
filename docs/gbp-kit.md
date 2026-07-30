@@ -94,7 +94,7 @@ the 300-character limit. Enter prices exactly — Google shows them in the profi
 > A free 30-minute call with Tamika to talk through what you're carrying and which session fits. Zero pressure, zero cost — you'll know within the half hour whether this is your person.
 
 **Soulful Journey Transformation Program — $399/month**
-> A 12-month transformation container: monthly master classes, four 30-minute reiki sessions each month, bi-weekly one-on-one coaching, and quarterly live panels. Built for seasons of real change.
+> A 12-month transformation container: three private 30-minute sessions each month (coaching or wellness), a personalized monthly wellness plan, a guided journal, the full premium library, priority messaging, and 15% off everything else. Built for seasons of real change.
 
 ## 4. Attributes (Edit profile → About → Attributes / "From the business")
 
@@ -183,7 +183,7 @@ https://deltaroe.com (or the direct page once the domain cutover is live).
 >
 > Delta Roe's new website is live — every session explained honestly (what happens, what it costs, what you'll feel), a 60-second 432 Hz sound sample you can play with headphones, and online booking around the clock.
 >
-> If you've been circling the idea of a reiki session or your first sound bath, queen, this is your sign. Come see what we've built for you.
+> If you've been circling the idea of a reiki session or your first sound bath, friend, this is your sign. Come see what we've built for you.
 
 **Week 2 — Update · photo #4 · button: "Book" → booking link**
 > What is a sound bath, exactly?
@@ -223,8 +223,8 @@ months but keep working in the profile feed.
    - `docs/review-templates.md` → every `[REVIEW-LINK]` placeholder
    - Facebook page "Review us on Google" pinned post (optional)
    - Nowhere else needed — the printed QR card points at deltaroe.com/review,
-     which forwards visitors to this same link, so **printed cards never go
-     stale** even if Google changes the short-link format.
+     which forwards visitors to this same link, so **printed cards never go stale**
+     even if Google changes the short-link format.
 
 ---
 
