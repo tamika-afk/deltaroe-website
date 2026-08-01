@@ -139,11 +139,20 @@ removed items (master classes, 4th session, bi-weekly coaching, quarterly panels
 
 ## Launch checklist (state as of late July 2026)
 
-Waiting on Tamika's sign-off: prices, product names, membership tiers, Roe voice,
-chakra page, "The Delta Roe Method" framing (invented — needs her blessing), plus the
-delivered requests (The Clearing, intake, Soulful Journey revision).
+**Signed off by Tamika 8/1/2026** — prices, membership tiers, and "The Delta Roe
+Method" framing were reviewed item by item and approved as they stand. The approved
+menu is: Discovery Call free · Sound Bath $77 · Diet & Nutrition Coaching $88 ·
+Chakra Alignment $120 · Reiki Healing $144 · Reiki & Chakra Alignment $144 · Chakra
+Alignment + Sound Bath $177 · Fascia Flow Reset $188 · Reiki + Sound Bath $188 · Life
+Coaching $250; memberships Sanctuary Circle $33/mo · Ritual $129/mo · Soulful Journey
+$399/mo. **These prices are the source of truth for the Square Appointments setup** —
+if they change in Square, they must change here too (see rule 7).
 
-After sign-off, in order:
+"The Delta Roe Method" (Ground → Align → Restore → Integrate → Transform) is blessed
+and lives in exactly one place: the "How healing happens here" section of
+`app/page.tsx`. It is not echoed elsewhere, so it is a single-file edit if ever revised.
+
+Then, in order:
 1. **Square Appointments** setup (booking, deposits, gift cards, memberships).
 2. Swap `bookingUrl` in `lib/site.ts` from the Wix scheduler to Square.
 3. **DNS cutover** deltaroe.com → Vercel. Capture/save the legacy Wix pages FIRST —
