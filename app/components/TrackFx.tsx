@@ -10,33 +10,16 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { track as vaTrack } from "@vercel/analytics";
 
-// Dual-write: Vercel Analytics (dashboard) + our own counter mirror (feeds the
-// automated email synopsis — Vercel has no data API). Counters only, no PII.
-const MIRROR = "https://robbjack.com/api/droe/track";
+// Events go to Vercel Web Analytics only. (Until the 8/1/2026 handover these
+// were also mirrored to a counter endpoint on the previous web developer's
+// domain, which fed an automated email synopsis. That tie was removed when the
+// site became Delta Roe's own — no visitor data leaves Tamika's stack.)
 function track(e: string, props?: Record<string, string | number>) {
   vaTrack(e, props);
-  try {
-    const payload = JSON.stringify({ e, page: String(props?.page ?? location.pathname), extra: String(props?.service ?? props?.depth ?? props?.seconds ?? "") });
-    navigator.sendBeacon?.(MIRROR, new Blob([payload], { type: "text/plain" })) ||
-      fetch(MIRROR, { method: "POST", body: payload, keepalive: true }).catch(() => {});
-  } catch {
-    // best-effort
-  }
 }
 
 export default function TrackFx() {
   const pathname = usePathname();
-
-  // one mirrored page-view per route change (Vercel counts views natively)
-  useEffect(() => {
-    try {
-      const payload = JSON.stringify({ e: "view", page: pathname || "/" });
-      navigator.sendBeacon?.(MIRROR, new Blob([payload], { type: "text/plain" })) ||
-        fetch(MIRROR, { method: "POST", body: payload, keepalive: true }).catch(() => {});
-    } catch {
-      // best-effort
-    }
-  }, [pathname]);
 
   // click delegation
   useEffect(() => {
