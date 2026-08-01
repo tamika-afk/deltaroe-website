@@ -53,7 +53,7 @@ export const KB: KbEntry[] = [
     boost: ["never", "first time", "beginner", "nervous"],
     answer:
       "First of all — the fact that you're here means something in you is ready. Nobody stumbles into a sanctuary by accident. ✨ For a first visit, I always suggest the Sound Bath ($77, 30 min): no touch, nothing to believe, nothing to be good at. You lie down under blankets and let bowls tuned to 432 Hz do the work. Or start with a free 30-minute Discovery Call and let Tamika point you to the right door.",
-    link: { href: "https://www.deltaroe.com/book-online", label: "Book your first session" },
+    link: { href: "/book", label: "Book your first session" },
     chips: ["What happens in a sound bath?", "What should I wear?", "Is reiki safe?"],
   },
   {
@@ -95,7 +95,7 @@ export const KB: KbEntry[] = [
     boost: ["book", "appointment", "schedule", "walk in", "walk-in"],
     answer:
       "Booking takes under a minute online — every session, including the free Discovery Call. Sessions are by appointment only, so the studio is always yours alone. Same-week openings are common, and evenings (open until 9pm, Tuesday through Saturday) are perfect for exhaling after work. Don't overthink it, love. The calendar is the easy part; showing up for yourself is the practice.",
-    link: { href: "https://www.deltaroe.com/book-online", label: "Book now" },
+    link: { href: "/book", label: "Book now" },
     chips: ["What are your hours?", "Where are you located?", "What should I book first?"],
   },
   {
@@ -111,7 +111,7 @@ export const KB: KbEntry[] = [
     boost: ["hours", "open"],
     answer:
       "Tuesday–Saturday 11am–9pm (yes, evenings — decompress after work), closed Sunday and Monday. Everything is by appointment so the room is always private. The night session hits different: you leave calm and go straight home to sleep like royalty.",
-    link: { href: "https://www.deltaroe.com/book-online", label: "See open times & book" },
+    link: { href: "/book", label: "See open times & book" },
     chips: ["How do I book?", "Where are you located?"],
   },
   {
@@ -160,7 +160,7 @@ export const KB: KbEntry[] = [
     boost: ["which", "recommend", "right for me"],
     answer:
       "Let's find your door. Racing mind that won't shut off? → Sound Bath ($77). Carrying grief, heartbreak, or heaviness? → Reiki ($144). Feeling stuck and foggy everywhere at once? → Chakra Alignment + Sound Bath ($177). Body tension that massage never fixes? → Fascia Flow Reset ($188). Standing at a crossroads in your life? → Coaching, starting with the free Discovery Call. And if you're still unsure — the Discovery Call is free, love. That's what it's for.",
-    link: { href: "https://www.deltaroe.com/book-online", label: "Book a free Discovery Call" },
+    link: { href: "/book", label: "Book a free Discovery Call" },
     chips: ["What's a sound bath like?", "Tell me about reiki", "What does coaching cost?"],
   },
   {
@@ -277,7 +277,7 @@ export const KB: KbEntry[] = [
     boost: ["discovery call", "free call", "consultation"],
     answer:
       "The Discovery Call is 30 minutes, completely free, and exactly what it sounds like: you and Tamika, talking about what you're carrying and which door makes sense — session work, coaching, or the Soulful Journey. No script, no pressure, no card required. If a session is a leap, this is the step. Every transformation at Delta Roe has started with this exact conversation.",
-    link: { href: "https://www.deltaroe.com/book-online", label: "Book your free Discovery Call" },
+    link: { href: "/book", label: "Book your free Discovery Call" },
     chips: ["What does coaching cost?", "Which session is right for me?"],
   },
   {
@@ -343,7 +343,7 @@ export const KB: KbEntry[] = [
     boost: ["nervous system", "fight or flight", "cortisol", "vagus"],
     answer:
       "Here's the thread under everything at Delta Roe: your nervous system has two gears — fight-or-flight (sympathetic) and rest-and-repair (parasympathetic) — and modern life leaves most of us stuck in the first one, marinating in cortisol. Sound, reiki, breath, and stillness are all doorways to the second gear: heart rate settles, breathing slows, digestion and repair switch back on. That's why 30 minutes can change your whole week — you're not escaping your life, you're switching the gear it runs in.",
-    link: { href: "https://www.deltaroe.com/book-online", label: "Give your nervous system 30 minutes" },
+    link: { href: "/book", label: "Give your nervous system 30 minutes" },
     chips: ["Which session is right for me?", "Will I fall asleep?"],
   },
   {
@@ -415,11 +415,11 @@ function bigrams(text: string): string[] {
 
 // Where each FAQ category should send people.
 const CATEGORY_LINKS: Record<string, KbLink> = {
-  "New Here — Start With These": { href: "https://www.deltaroe.com/book-online", label: "Book your first session" },
+  "New Here — Start With These": { href: "/book", label: "Book your first session" },
   "Reiki, Explained Honestly": { href: "/services/reiki-elk-grove", label: "Reiki details & booking" },
   "Sound Baths & 432 Hz": { href: "/services/sound-bath-elk-grove", label: "Sound bath details & booking" },
   "Chakras & Energy Work": { href: "/services/chakra-alignment", label: "Chakra alignment details" },
-  "Booking, Pricing & Policies": { href: "https://www.deltaroe.com/book-online", label: "Book now" },
+  "Booking, Pricing & Policies": { href: "/book", label: "Book now" },
   "Memberships & Going Deeper": { href: "/memberships", label: "Compare memberships" },
   "Local & Practical — Elk Grove": { href: "/contact", label: "Directions & hours" },
   "Groups, Events & Corporate": { href: "/events", label: "See upcoming events" },

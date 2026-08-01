@@ -6,6 +6,7 @@ import { ARTICLES } from "@/lib/journal";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     "",
+    "/book",
     "/services",
     "/sound-chakras",
     "/the-clearing",

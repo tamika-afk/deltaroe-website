@@ -1,0 +1,66 @@
+/* Booking page — hosts Vagaro's embedded widget.
+
+   Vagaro's snippet ships width:250px inline, which is far too narrow for a
+   calendar; the container here is fluid instead. Their widget renders as an
+   iframe we can't restyle from outside (cross-origin), and it comes in light —
+   so rather than let a white slab collide with the sanctuary's black ground, it
+   sits on a deliberate cream card with a gold edge and reads as intentional. */
+
+.frame {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.vagaroCard {
+  background: #fffdf8;
+  border: 1px solid rgba(201, 164, 100, 0.4);
+  border-radius: 14px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+/* The loader injects an iframe; force it fluid, since Vagaro sizes it for the
+   250px container its snippet assumes. */
+.frame :global(.vagaro) {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.frame :global(.vagaro iframe) {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 720px;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .frame :global(.vagaro iframe) {
+    min-height: 640px;
+  }
+}
+
+.attrib {
+  text-align: center;
+  margin: 14px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.attrib a {
+  color: rgba(245, 239, 227, 0.4);
+  text-decoration: none;
+}
+
+.attrib a:hover {
+  color: var(--gold);
+}
+
+.fallback {
+  background: rgba(201, 164, 100, 0.08);
+  border-left: 3px solid var(--gold);
+  padding: 16px 20px;
+  line-height: 1.7;
+  margin: 0;
+}

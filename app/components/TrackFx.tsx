@@ -29,7 +29,9 @@ export default function TrackFx() {
       const href = (el.getAttribute("href") || "").toLowerCase();
       const label = `${el.getAttribute("aria-label") || ""} ${el.textContent || ""}`.toLowerCase();
       const page = window.location.pathname;
-      if (href.includes("book-online") || label.includes("book ")) track("booking_click", { page });
+      // Booking moved on-site to /book (was the Wix book-online URL). Matched
+      // exactly so the /booked confirmation page doesn't count as a booking click.
+      if (href === "/book" || label.includes("book ")) track("booking_click", { page });
       else if (href.startsWith("tel:")) track("call_click", { page });
       else if (href.startsWith("mailto:")) track("email_click", { page });
       else if (href.includes("yelp.com")) track("yelp_click", { page });

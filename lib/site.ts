@@ -22,8 +22,11 @@ export const SITE = {
   },
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Delta+Roe+9075+Elk+Grove+Blvd+Suite+220A+Elk+Grove+CA+95624",
-  // Booking runs through the existing scheduler until Square Appointments goes live.
-  bookingUrl: "https://www.deltaroe.com/book-online",
+  // Booking is on-site: /book hosts Vagaro's embedded calendar, so the dozen-plus
+  // "Book" buttons around the site keep clients on deltaroe.com instead of handing
+  // them to a third-party scheduler mid-decision. (Was the Wix scheduler; Square
+  // was declined — see the launch checklist in CLAUDE.md.)
+  bookingUrl: "/book",
   hours: [
     { days: "Tuesday – Saturday", time: "11:00 am – 9:00 pm" },
     { days: "Sunday – Monday", time: "Closed" },
