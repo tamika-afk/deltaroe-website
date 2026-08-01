@@ -113,9 +113,13 @@ removed items (master classes, 4th session, bi-weekly coaching, quarterly panels
   when safety flags are checked. Includes consent/scope/cancellation/18+/e-signature
   clauses and points at the live menu instead of hard-coding fees. There is also a
   print-blank version for the studio clipboard.
-  **Handover item:** the sender is currently the interim
-  `web@send.robbjack.com` (hard-coded in `app/api/intake/route.ts`); at handover,
-  switch to Tamika's own Resend account + a verified deltaroe.com sending domain.
+  **Sender (handed over 8/1/2026):** `web@mail.deltaroe.com`, sent through Tamika's
+  own Resend account. Only **DKIM** is verified on that domain — Wix's DNS cannot
+  host an MX record on a subdomain, so Resend's bounce-feedback MX was deliberately
+  skipped and the domain shows "pending" for SPF/MX in the Resend dashboard. That is
+  expected, not a bug: sending works, but bounce/complaint feedback is not collected.
+  If DNS ever moves off Wix (e.g. to Cloudflare at the deltaroe.com cutover), add the
+  MX record `send.mail` → `feedback-smtp.us-east-1.amazonses.com` to complete it.
 
 ## Launch checklist (state as of late July 2026)
 

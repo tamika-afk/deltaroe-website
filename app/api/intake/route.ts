@@ -2,8 +2,11 @@
 // with reply-to set to the client. Requires RESEND_API_KEY in the environment;
 // without it the route fails safe with a call-the-studio message (and logs the
 // submission to the function logs as a last-resort backstop — filter
-// "[intake]"). Interim sender: the send.robbjack.com verified domain until
-// Delta Roe's own sending domain is set up at handover (owner's manual note).
+// "[intake]"). Sends from mail.deltaroe.com, verified in Delta Roe's own
+// Resend account. Note: only DKIM is verified there — Wix's DNS can't host an
+// MX record on a subdomain, so Resend's bounce-feedback MX was skipped and the
+// domain shows "pending" for SPF/MX. Sending is unaffected; bounce/complaint
+// feedback is not collected automatically.
 export async function POST(req: Request) {
   let b: Record<string, unknown>;
   try {
@@ -81,7 +84,7 @@ export async function POST(req: Request) {
       method: "POST",
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "Delta Roe Website <web@send.robbjack.com>",
+        from: "Delta Roe Website <web@mail.deltaroe.com>",
         to: ["Info@deltaroe.com"],
         reply_to: email || undefined,
         subject: `New client intake — ${name}${checks("safety") !== "—" && !/none of these/i.test(checks("safety")) ? " ⚠ safety flags" : ""}`,
