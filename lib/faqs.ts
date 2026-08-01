@@ -153,7 +153,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       },
       {
         q: "What are Delta Roe's hours?",
-        a: "Monday–Wednesday 9am–9pm, Thursday 9am–5pm, Friday 1pm–3pm, Saturday 11am–3pm, closed Sunday. Evening appointments on Monday through Wednesday are ideal for decompressing after work — sessions run by appointment only.",
+        a: "Tuesday–Saturday 11am–9pm, closed Sunday and Monday. Evening appointments are ideal for decompressing after work — sessions run by appointment only.",
       },
       {
         q: "Is there a reiki or sound bath studio near Sacramento?",

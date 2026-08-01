@@ -103,9 +103,17 @@ static. Content lives in data files — most requests are edits to these:
 
 ## Business facts (mirror of lib/site.ts — that file is authoritative)
 
-Phone (916) 206-1752 · Info@deltaroe.com · Hours: Mon–Wed 9–9, Thu 9–5, Fri 1–3,
-Sat 11–3, Sun closed. Founder: Tamika Banks. Programs: Sanctuary Circle $33/mo
-(virtual), Ritual Membership $129/mo (studio), Soulful Journey $399/mo.
+Phone (916) 206-1752 · Info@deltaroe.com · Hours: **Tue–Sat 11am–9pm, closed Sun &
+Mon** (changed 8/1/2026 from the old Mon–Wed 9–9 / Thu 9–5 / Fri 1–3 / Sat 11–3
+pattern). Founder: Tamika Banks. Programs: Sanctuary Circle $33/mo (virtual),
+Ritual Membership $129/mo (studio), Soulful Journey $399/mo.
+
+**Hours live in seven places** — changing them means all of: `lib/site.ts` (the
+authoritative array), `lib/faqs.ts`, `lib/roe-kb.ts` (two entries: the booking
+answer and the hours answer), `public/llms.txt`, `docs/gbp-kit.md`, the
+`openingHoursSpecification` structured data in `app/layout.tsx` (this is what
+Google reads — easy to miss), and this file. Google Business Profile has to be
+updated by hand as well; it is not part of the repo.
 
 **Soulful Journey (revised to Tamika's spec 7/21/2026):** $399/mo = 3 private 30-min
 sessions (coaching or wellness) + personalized monthly wellness plan + guided journal +

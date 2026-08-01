@@ -11,8 +11,9 @@ first ~100–150 show before "More", so front-load).
 **Before you start:** confirm the listing shows the exact name, address, and phone
 used everywhere else — `Delta Roe · 9075 Elk Grove Blvd, Suite 220A, Elk Grove, CA
 95624 · (916) 206-1752`. Consistency across Google, Yelp, Facebook, and the website
-is a ranking factor. Also confirm hours match the site: Mon–Wed 9am–9pm, Thu
-9am–5pm, Fri 1pm–3pm, Sat 11am–3pm, Sun closed.
+is a ranking factor. Also confirm hours match the site: Tue–Sat 11am–9pm, closed
+Sunday and Monday. (Updated 8/1/2026 — if the Google listing still shows the old
+Mon–Wed 9–9 / Thu 9–5 / Fri 1–3 / Sat 11–3 pattern, correct it there too.)
 
 ---
 

@@ -25,11 +25,8 @@ export const SITE = {
   // Booking runs through the existing scheduler until Square Appointments goes live.
   bookingUrl: "https://www.deltaroe.com/book-online",
   hours: [
-    { days: "Monday – Wednesday", time: "9:00 am – 9:00 pm" },
-    { days: "Thursday", time: "9:00 am – 5:00 pm" },
-    { days: "Friday", time: "1:00 pm – 3:00 pm" },
-    { days: "Saturday", time: "11:00 am – 3:00 pm" },
-    { days: "Sunday", time: "Closed" },
+    { days: "Tuesday – Saturday", time: "11:00 am – 9:00 pm" },
+    { days: "Sunday – Monday", time: "Closed" },
   ],
   founder: "Tamika Banks",
   credentials: "Certified Reiki Master & Empowerment Life Coach",

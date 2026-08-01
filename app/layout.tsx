@@ -69,10 +69,12 @@ const schemaGraph = {
       },
       areaServed: ["Elk Grove CA", "Sacramento CA", "Laguna CA", "Galt CA"],
       openingHoursSpecification: [
-        { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday"], opens: "09:00", closes: "21:00" },
-        { "@type": "OpeningHoursSpecification", dayOfWeek: "Thursday", opens: "09:00", closes: "17:00" },
-        { "@type": "OpeningHoursSpecification", dayOfWeek: "Friday", opens: "13:00", closes: "15:00" },
-        { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "11:00", closes: "15:00" },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: "11:00",
+          closes: "21:00",
+        },
       ],
       priceRange: "$77 - $399",
     },

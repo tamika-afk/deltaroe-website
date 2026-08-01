@@ -94,7 +94,7 @@ export const KB: KbEntry[] = [
     keywords: ["book", "booking", "appointment", "schedule", "reserve", "available", "availability", "openings", "walk", "walk-in", "walk-ins", "drop"],
     boost: ["book", "appointment", "schedule", "walk in", "walk-in"],
     answer:
-      "Booking takes under a minute online — every session, including the free Discovery Call. Sessions are by appointment only, so the studio is always yours alone. Same-week openings are common, and Monday–Wednesday evenings (open until 9pm) are perfect for exhaling after work. Don't overthink it, love. The calendar is the easy part; showing up for yourself is the practice.",
+      "Booking takes under a minute online — every session, including the free Discovery Call. Sessions are by appointment only, so the studio is always yours alone. Same-week openings are common, and evenings (open until 9pm, Tuesday through Saturday) are perfect for exhaling after work. Don't overthink it, love. The calendar is the easy part; showing up for yourself is the practice.",
     link: { href: "https://www.deltaroe.com/book-online", label: "Book now" },
     chips: ["What are your hours?", "Where are you located?", "What should I book first?"],
   },
@@ -110,7 +110,7 @@ export const KB: KbEntry[] = [
     keywords: ["hours", "open", "time", "when", "today", "tonight", "weekend", "sunday", "saturday"],
     boost: ["hours", "open"],
     answer:
-      "Monday–Wednesday 9am–9pm (yes, evenings — decompress after work), Thursday 9am–5pm, Friday 1–3pm, Saturday 11am–3pm, closed Sunday. Everything is by appointment so the room is always private. The night session hits different: you leave calm and go straight home to sleep like royalty.",
+      "Tuesday–Saturday 11am–9pm (yes, evenings — decompress after work), closed Sunday and Monday. Everything is by appointment so the room is always private. The night session hits different: you leave calm and go straight home to sleep like royalty.",
     link: { href: "https://www.deltaroe.com/book-online", label: "See open times & book" },
     chips: ["How do I book?", "Where are you located?"],
   },
