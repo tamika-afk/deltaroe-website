@@ -506,11 +506,13 @@ const ALL_SERVICES: Service[] = [
     name: "Diet & Nutrition Coaching",
     menuName: "Diet & Nutrition Coaching",
     price: 88,
+    duration: "45 minutes",
+    durationIso: "PT45M",
     tag: "Nourish",
     short:
       "Grounded, results-driven nutrition coaching with Cline Moore — sustainable habits, energy optimization, and physical alignment.",
     answer:
-      "Diet & Nutrition Coaching at Delta Roe in Elk Grove costs $88 per session and is led by nutrition coach Cline Moore. It's a grounded, results-driven approach — practical nutrition science paired with lifestyle awareness to build realistic, consistent, effective habits.",
+      "Diet & Nutrition Coaching at Delta Roe in Elk Grove lasts 45 minutes and costs $88 per session, led by nutrition coach Cline Moore. It's a grounded, results-driven approach — practical nutrition science paired with lifestyle awareness to build realistic, consistent, effective habits.",
     intro:
       "Healing isn't only energetic — the body keeps its own ledger. This is the practical side of the Delta Roe menu: nutrition coaching with Cline Moore that trades fads and restriction for habits you can actually keep. Sustainable health, steadier energy, and a body that feels aligned with the work you're doing on the table. It pairs naturally with the energy sessions — what reiki releases, nutrition sustains.",
     expect: [
