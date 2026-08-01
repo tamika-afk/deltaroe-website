@@ -161,15 +161,33 @@ and lives in exactly one place: the "How healing happens here" section of
 `app/page.tsx`. It is not echoed elsewhere, so it is a single-file edit if ever revised.
 
 Then, in order:
-1. **Square Appointments** setup (booking, deposits, gift cards, memberships).
-2. Swap `bookingUrl` in `lib/site.ts` from the Wix scheduler to Square.
+1. **Vagaro** setup (booking, deposits, gift cards, memberships). **Square is dead —
+   do not revisit it.** Square declined the merchant account after review (fallout
+   from a stolen card, unresolved actions). Fresha was considered and dropped: its
+   free tier ended in early 2025. Vagaro was chosen 8/1/2026 for its membership
+   handling and, crucially, an **embeddable booking widget** so clients book without
+   leaving deltaroe.com.
+2. Swap `bookingUrl` in `lib/site.ts` from the Wix scheduler to Vagaro, and build the
+   Vagaro embed widget into the site. `bookingUrl` is referenced in 12+ components but
+   they all read that one constant, so it is a single edit.
 3. **DNS cutover** deltaroe.com → Vercel. Capture/save the legacy Wix pages FIRST —
    they die at cutover.
-4. **Google Business Profile**: flip website link, finish verification, get the real
+4. ⚠️ **AT GO-LIVE, change the post-booking redirect inside Vagaro** from
+   `https://deltaroe-website.vercel.app/booked` to `https://deltaroe.com/booked`.
+   This lives in **Vagaro's own settings, not in this repo** — nothing in the codebase
+   will flag it, and grepping for `vercel.app` finds nothing. If it is missed, every
+   client who books gets bounced to the old preview domain after paying. Re-check any
+   other absolute URL saved inside Vagaro at the same time.
+5. **Google Business Profile**: flip website link, finish verification, get the real
    review short-link ("Ask for reviews" in GBP) and put it in `REVIEW_URL` in
    `lib/site.ts` (currently a REPLACE_ME placeholder; see `docs/gbp-kit.md` §8).
+   Also correct the **hours** there — they still show the pre-8/1/2026 schedule.
    Add GA4 (`NEXT_PUBLIC_GA_ID`) + Search Console. Vercel Web Analytics already live.
-5. Cancel Wix. 🎉
+6. Cancel Wix. 🎉
+
+**/booked** is the post-booking landing page (noindex, deliberately absent from
+`app/sitemap.ts`). Its job is to catch new clients at their most engaged moment and
+send them to the intake form before their first visit.
 
 **Review engine already built:** `/review` funnel page, `docs/gbp-kit.md`, printable
 review card (`docs/review-card.html`), reply templates (`docs/review-templates.md`).
