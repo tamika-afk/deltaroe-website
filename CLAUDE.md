@@ -84,6 +84,22 @@ static. Content lives in data files — most requests are edits to these:
    `.next` (fix: stop server, delete `.next`, restart). Local dev port is **3210**
    (`.claude/launch.json`, `deltaroe-dev`). Local preview is optional — Vercel
    deploys are the source of truth for verification.
+9. **Every form that gets emailed to the studio must arrive formatted for easy
+   reading (Tamika's standing rule, 8/1/2026)** — never a wall of plain text.
+   Tamika reads these on a phone, often minutes before a client walks in, so the
+   email has to be scannable at a glance. The pattern is set by
+   `app/api/intake/route.ts`, and any new emailed form should follow it:
+   - Send `html` **and** `text` to Resend, and render both from one shared data
+     array so the two can never drift apart.
+   - Lead with who it's from; make phone/email tappable (`tel:` / `mailto:`).
+   - Anything urgent or safety-related goes in a coloured banner near the top,
+     and into the subject line — never buried mid-body.
+   - Group into labelled sections; give long free-text answers their own block.
+   - Show unanswered questions as "not answered" rather than dropping the row —
+     on an intake form, a blank is information.
+   - Studio palette (midnight `#14100a`, gold `#c9a464`, champagne `#e6cd95`) on
+     a light readable body; table-based layout with inline styles, since email
+     clients ignore modern CSS. Always escape user input into the HTML.
 
 ## Business facts (mirror of lib/site.ts — that file is authoritative)
 
