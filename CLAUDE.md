@@ -161,6 +161,14 @@ and lives in exactly one place: the "How healing happens here" section of
 `app/page.tsx`. It is not echoed elsewhere, so it is a single-file edit if ever revised.
 
 Then, in order:
+0. ⚠️ **`RESEND_API_KEY` must be correct in the CURRENT Vercel project.** Confirmed
+   broken 8/1/2026: an identical POST to `/api/intake` returned `{"ok":true}` on the
+   old project but **502** on the new one, so the key there cannot send from
+   `mail.deltaroe.com` (likely a leftover from the previous developer's account). A
+   502 means a key exists but is rejected; 503 means none is set. Symptom for a real
+   client: *"delivery failed — please call the studio"* and the submission never
+   arrives. **Env var changes need a redeploy to take effect.** Re-test by POSTing a
+   sample payload to `/api/intake` before launch — do not assume.
 1. **Vagaro** setup (booking, deposits, gift cards, memberships). **Square is dead —
    do not revisit it.** Square declined the merchant account after review (fallout
    from a stolen card, unresolved actions). Fresha was considered and dropped: its
