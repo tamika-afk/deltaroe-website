@@ -18,8 +18,14 @@
 import { useEffect, useRef } from "react";
 import s from "./Book.module.css";
 
+// Regenerated 8/1/2026 after setting "Redirect After Booking" to
+// https://deltaroe.com/booked. NOTE: Vagaro mints a brand-new widget (and a new
+// loader URL) every time that settings screen is saved — the old code silently
+// keeps serving the old configuration. So any change on Settings → Booking
+// Widget means pasting the fresh embed code in here, not just assuming it
+// picked the change up.
 const LOADER_SRC =
-  "https://www.vagaro.com//resources/WidgetEmbeddedLoader/OZqqDpKqD3OcT3qnV3Dy6puSdBuOc1WJD1wOc1WO61Ctdg4tjxMGFBUwkH0vihcvjBUt4pkUcvCu7gevEhAJDXwPapcUbfY?v=THAykTQc9OZucVq2zFtvj1oJXoyj9PpaTTzAjAFgtun0#";
+  "https://www.vagaro.com//resources/WidgetEmbeddedLoader/OZqqDpKqD3OcT3qmV35y6RuRFXoSlXYO61Cq7fYO61WO4pUUeJUtjP0dDxkJEvwRapWUgZawifCs7fYJEPwMc8?v=UM6Kxh9fm3H5YKc3o1PalsAVGoXveKtX2lYi5VTZyuM#";
 
 export default function VagaroWidget() {
   const host = useRef<HTMLDivElement>(null);
