@@ -178,19 +178,30 @@ Then, in order:
    (it survives only in the function logs). **Env var changes need a redeploy to take
    effect.** Re-test by POSTing a sample payload before launch — do not assume.
 
-   **The missing MX record is NOT the cause — settled 8/4/2026.** The old deployment
-   sends from the same `web@mail.deltaroe.com` (it postdates that commit — it carries
-   the Tue–Sat hours) and it delivers fine. So **DKIM + SPF alone are sufficient for
-   Resend to send**, and the absent bounce-feedback MX costs only automatic
-   bounce/complaint reporting. **A Cloudflare/DNS migration is therefore NOT required
-   to fix the intake form** — an idea that was seriously entertained on 8/1 and would
-   have put Google Workspace email at risk for no benefit. The fix is simply the
-   correct key from Tamika's own Resend account, set in the new project.
+   **⚠️ The old project's `{"ok":true}` proves NOTHING about `mail.deltaroe.com`.**
+   Retracted the same evening, 8/4/2026: Tamika reported the resulting email arrived
+   **from `web@send.robbjack.com`** — the previous developer's own Resend account and
+   domain. That deployment is running *pre-handover* code, so its success says nothing
+   about whether Delta Roe's own domain can send. (The reasoning that it "postdates the
+   sender-change commit because its contact page says Tuesday" was worthless — the old
+   Mon–Wed hours listed Tuesday too.)
 
-   **Beware of flip-flopping here.** Two opposite claims were both asserted on 8/1
-   without testing — "partial verification is fine" and then "Resend refuses to send".
-   The 502-vs-200 comparison between the two projects is the test that actually
-   settles it. Run it; don't reason about it.
+   **So the cause is still genuinely OPEN — do not assert either way:**
+   - Most likely: the new project inherited **the previous developer's Resend key**,
+     which cannot send from `mail.deltaroe.com` because his account does not own that
+     domain. That alone explains the 502, and the fix is just Tamika's own key.
+   - Still possible: `mail.deltaroe.com` is not verified enough to send, in which case
+     the missing MX **does** matter and moving DNS off Wix may be required after all.
+
+   **The one test that distinguishes them:** put a key from *Tamika's own* Resend
+   account into the new project, redeploy, POST to `/api/intake`, then confirm the
+   received email's **From** address is `web@mail.deltaroe.com`. **Always check the
+   From address — a 200 alone is not proof of anything.**
+
+   **Beware of flip-flopping here.** Three confident claims have now been made without
+   adequate testing: "partial verification is fine" (8/1), "Resend refuses to send"
+   (8/1), and "DKIM+SPF is proven sufficient" (8/4). Each sounded settled at the time.
+   Run the test above; do not reason about it.
 
    To find the precise Resend error, read the Vercel function logs for the
    `[intake] SEND FAILED` line — the route logs the real message but deliberately does
