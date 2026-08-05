@@ -26,12 +26,21 @@ technical experience. When working with her:
 
 ## Live URLs & deploy model
 
-- **Live site:** https://deltaroe-website.vercel.app — pushing to `main` on GitHub
-  auto-deploys via Vercel (about 1–2 minutes).
+- **Live site:** `https://deltaroe-website-tmcclai6-2144s-projects.vercel.app` —
+  pushing to `main` on GitHub auto-deploys via Vercel (about 1–2 minutes).
+- ⚠️ **`https://deltaroe-website.vercel.app` is a STALE, different Vercel project**
+  (probably the previous developer's). Confirmed 8/4/2026: it serves no `/book` and no
+  `/booked`. Do not use it to verify work — this cost hours on 8/1/2026 when its old
+  content was mistaken for a broken build.
+- ⚠️ **The live project returns HTTP 403 to `curl` and other scripted checks.** That is
+  Vercel's **bot challenge** (`X-Vercel-Mitigated: challenge`), *not* Deployment
+  Protection and *not* a login wall — a real browser loads the site normally, so it
+  will not block deltaroe.com after cutover. To exercise an API route, load the page in
+  a browser and run a same-origin `fetch` from it.
 - **deltaroe.com** still points at the old Wix site until the DNS cutover (see Launch
-  checklist below). Until then, verify all work on the vercel.app URL.
-- Booking CTAs point at the existing Wix scheduler (`https://www.deltaroe.com/book-online`)
-  until Square Appointments is set up — the URL lives in `lib/site.ts` (`bookingUrl`).
+  checklist below). Until then, verify all work on the vercel.app URL above.
+- Booking is **on-site at `/book`**, which embeds Vagaro's widget; `bookingUrl` in
+  `lib/site.ts` is `/book`. (It formerly pointed at the Wix scheduler.)
 - Publishing a change = commit + push to `main`, then verify the live page after the
   deploy finishes. If the deploy fails, the site stays on the previous version (safe).
 
@@ -153,22 +162,39 @@ menu is: Discovery Call free · Sound Bath $77 · Diet & Nutrition Coaching $88 
 Chakra Alignment $120 · Reiki Healing $144 · Reiki & Chakra Alignment $144 · Chakra
 Alignment + Sound Bath $177 · Fascia Flow Reset $188 · Reiki + Sound Bath $188 · Life
 Coaching $250; memberships Sanctuary Circle $33/mo · Ritual $129/mo · Soulful Journey
-$399/mo. **These prices are the source of truth for the Square Appointments setup** —
-if they change in Square, they must change here too (see rule 7).
+$399/mo. **These prices are the source of truth for the Vagaro setup** — if they change
+in Vagaro, they must change here too (see rule 7). (Square is dead — see step 1.)
 
 "The Delta Roe Method" (Ground → Align → Restore → Integrate → Transform) is blessed
 and lives in exactly one place: the "How healing happens here" section of
 `app/page.tsx`. It is not echoed elsewhere, so it is a single-file edit if ever revised.
 
 Then, in order:
-0. ⚠️ **`RESEND_API_KEY` must be correct in the CURRENT Vercel project.** Confirmed
-   broken 8/1/2026: an identical POST to `/api/intake` returned `{"ok":true}` on the
-   old project but **502** on the new one, so the key there cannot send from
-   `mail.deltaroe.com` (likely a leftover from the previous developer's account). A
-   502 means a key exists but is rejected; 503 means none is set. Symptom for a real
-   client: *"delivery failed — please call the studio"* and the submission never
-   arrives. **Env var changes need a redeploy to take effect.** Re-test by POSTing a
-   sample payload to `/api/intake` before launch — do not assume.
+0. ⚠️ **`RESEND_API_KEY` must be correct in the CURRENT Vercel project.** Still broken
+   as of **8/4/2026** — retested that evening: an identical POST to `/api/intake`
+   returned **502 on the new project** and **`{"ok":true}` on the old one**. A 502
+   means a key exists but Resend rejects it; 503 means none is set. Symptom for a real
+   client: *"delivery failed — please call the studio"*, and the submission is lost
+   (it survives only in the function logs). **Env var changes need a redeploy to take
+   effect.** Re-test by POSTing a sample payload before launch — do not assume.
+
+   **The missing MX record is NOT the cause — settled 8/4/2026.** The old deployment
+   sends from the same `web@mail.deltaroe.com` (it postdates that commit — it carries
+   the Tue–Sat hours) and it delivers fine. So **DKIM + SPF alone are sufficient for
+   Resend to send**, and the absent bounce-feedback MX costs only automatic
+   bounce/complaint reporting. **A Cloudflare/DNS migration is therefore NOT required
+   to fix the intake form** — an idea that was seriously entertained on 8/1 and would
+   have put Google Workspace email at risk for no benefit. The fix is simply the
+   correct key from Tamika's own Resend account, set in the new project.
+
+   **Beware of flip-flopping here.** Two opposite claims were both asserted on 8/1
+   without testing — "partial verification is fine" and then "Resend refuses to send".
+   The 502-vs-200 comparison between the two projects is the test that actually
+   settles it. Run it; don't reason about it.
+
+   To find the precise Resend error, read the Vercel function logs for the
+   `[intake] SEND FAILED` line — the route logs the real message but deliberately does
+   not return it to the browser.
 1. **Vagaro** setup (booking, deposits, gift cards, memberships). **Square is dead —
    do not revisit it.** Square declined the merchant account after review (fallout
    from a stolen card, unresolved actions). Fresha was considered and dropped: its
