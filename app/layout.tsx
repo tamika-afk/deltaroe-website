@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { jsonLd } from "@/lib/jsonld";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
@@ -115,7 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(schemaGraph) }}
         />
         <header className="site-header">
           <div className="inner">

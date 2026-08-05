@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { jsonLd } from "@/lib/jsonld";
 import Link from "next/link";
 import { SITE, YELP_URL } from "@/lib/site";
 
@@ -45,7 +46,7 @@ export default function ReviewsPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(reviewSchema) }}
       />
       <div className="svc-hero">
         <div className="narrow">

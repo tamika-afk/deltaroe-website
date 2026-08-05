@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { jsonLd } from "@/lib/jsonld";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { CHAKRAS } from "@/lib/chakras";
@@ -59,15 +60,15 @@ export default function SoundChakrasPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(pageSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(listSchema) }}
       />
 
       <div className="svc-hero" style={{ paddingBottom: 28 }}>

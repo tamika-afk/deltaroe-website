@@ -79,7 +79,15 @@ export default function IntakeForm() {
   };
   const show = (i: number) => step === i || printAll;
 
+  // When this form was opened, used server-side as a dwell-time check: a real
+  // person takes minutes, a script submits instantly. Set once on first render
+  // (useState initialiser, not useEffect) so it survives re-renders and step
+  // changes without resetting the clock.
+  const [openedAt] = useState(() => Date.now());
+
   const [f, setF] = useState({
+    // Honeypot. Must stay empty — anything here means a bot filled it in.
+    website: "",
     name: "",
     dob: "",
     address: "",
@@ -147,7 +155,7 @@ export default function IntakeForm() {
       const res = await fetch("/api/intake", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...f, signedDate: today }),
+        body: JSON.stringify({ ...f, signedDate: today, openedAt }),
       });
       const j = await res.json().catch(() => ({}));
       if (!res.ok || !j.ok) throw new Error(j.error || "Something went sideways.");
@@ -187,6 +195,25 @@ export default function IntakeForm() {
 
   return (
     <div className={s.wrap}>
+      {/* Spam honeypot — see app/api/intake/route.ts. Real people never see or
+          fill this; bots that auto-fill every input do, and the server then
+          drops the submission. Hidden via inline styles rather than a CSS class
+          so it stays invisible even if the stylesheet fails to load, and
+          aria-hidden + tabIndex keep it out of screen readers and tab order. */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+        <label>
+          Website (leave this blank)
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            value={f.website}
+            onChange={(e) => set("website", e.target.value)}
+          />
+        </label>
+      </div>
+
       {/* progress */}
       <div className={s.progress} aria-label={`Step ${step + 1} of ${STEPS.length}: ${STEPS[step]}`}>
         {STEPS.map((label, i) => (

@@ -26,12 +26,73 @@ const MIDNIGHT = "#14100a";
 const CHAMPAGNE = "#e6cd95";
 const RULE = "#e7ddc8";
 
+// --- Abuse controls (added 8/4/2026) -----------------------------------------
+// This endpoint is public, unauthenticated, and every accepted submission sends
+// an email to the studio. Before this, six rapid POSTs were all accepted — so
+// anyone could flood Info@deltaroe.com and burn the Resend quota.
+//
+// Three cheap layers, no new dependencies and no paid infrastructure:
+//   1. honeypot  — a field real people never see and bots fill in anyway
+//   2. dwell time — this form takes minutes to complete; a sub-3s submit is a script
+//   3. IP rate limit — best effort (see caveat below)
+//
+// ⚠️ The rate limit is PER SERVERLESS INSTANCE and resets on cold start, so it
+// is a speed bump, not a guarantee. Vercel may run several instances at once.
+// It stops casual/bot flooding, which is the realistic threat; it will not stop
+// a determined distributed attacker. Upgrading to durable limiting means Vercel
+// KV or Upstash — extra setup and cost, deliberately not taken on a Hobby plan.
+// Bots that trip the honeypot get a fake success so they don't learn to adapt.
+const RATE_LIMIT_MAX = 5; // submissions per IP...
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // ...per 10 minutes
+const MIN_DWELL_MS = 3000;
+const hits = new Map<string, { count: number; resetAt: number }>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  // Opportunistic sweep so the Map can't grow without bound on a warm instance.
+  if (hits.size > 5000) for (const [k, v] of hits) if (v.resetAt <= now) hits.delete(k);
+  const rec = hits.get(ip);
+  if (!rec || rec.resetAt <= now) {
+    hits.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  rec.count += 1;
+  return rec.count > RATE_LIMIT_MAX;
+}
+
 export async function POST(req: Request) {
+  // Vercel sets x-forwarded-for; take the first (client) hop. Unknown IPs share
+  // one bucket, which is acceptable — that bucket is the anonymous overflow.
+  const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
+  if (rateLimited(ip)) {
+    console.warn(`[intake] rate limited ${ip}`);
+    return Response.json(
+      { ok: false, error: "too many submissions — please call the studio" },
+      { status: 429, headers: { "Retry-After": String(RATE_LIMIT_WINDOW_MS / 1000) } },
+    );
+  }
+
   let b: Record<string, unknown>;
   try {
     b = await req.json();
   } catch {
     return Response.json({ ok: false, error: "Malformed submission" }, { status: 400 });
+  }
+
+  // Honeypot: `website` is hidden from humans and left empty by them.
+  // Answer 200 so bots record a success and move on rather than retrying.
+  if (String(b.website ?? "").trim()) {
+    console.warn(`[intake] honeypot tripped ${ip}`);
+    return Response.json({ ok: true });
+  }
+
+  // Dwell time: the client stamps when the form was opened. Missing or
+  // unparseable is tolerated (an old cached page shouldn't lock anyone out) —
+  // only an implausibly fast, present value is rejected.
+  const openedAt = Number(b.openedAt);
+  if (Number.isFinite(openedAt) && Date.now() - openedAt < MIN_DWELL_MS) {
+    console.warn(`[intake] submitted too fast ${ip}`);
+    return Response.json({ ok: false, error: "Please take a moment and try again" }, { status: 429 });
   }
 
   const t = (k: string) => String(b[k] ?? "").trim().slice(0, 2000);

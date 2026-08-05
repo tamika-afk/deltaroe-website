@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { jsonLd } from "@/lib/jsonld";
 import { SITE } from "@/lib/site";
 import { FAQ_CATEGORIES, ALL_FAQS } from "@/lib/faqs";
 
@@ -23,7 +24,7 @@ export default function FaqPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(faqSchema) }}
       />
       <div className="svc-hero">
         <div className="narrow">
