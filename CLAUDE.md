@@ -28,6 +28,9 @@ technical experience. When working with her:
 
 - **Live site:** `https://deltaroe-website-tmcclai6-2144s-projects.vercel.app` —
   pushing to `main` on GitHub auto-deploys via Vercel (about 1–2 minutes).
+  The `tmcclai6-2144s-projects` scope is **Tamika's own Vercel account** (confirmed
+  8/4/2026). The username doesn't look like her name, which previously raised doubts —
+  it is hers, so deltaroe.com can safely point at this project.
 - ⚠️ **`https://deltaroe-website.vercel.app` is a STALE, different Vercel project**
   (probably the previous developer's). Confirmed 8/4/2026: it serves no `/book` and no
   `/booked`. Do not use it to verify work — this cost hours on 8/1/2026 when its old
