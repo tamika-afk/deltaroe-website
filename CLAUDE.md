@@ -93,11 +93,13 @@ static. Content lives in data files — most requests are edits to these:
    `.next` (fix: stop server, delete `.next`, restart). Local dev port is **3210**
    (`.claude/launch.json`, `deltaroe-dev`). Local preview is optional — Vercel
    deploys are the source of truth for verification.
-9. **Every form that gets emailed to the studio must arrive formatted for easy
-   reading (Tamika's standing rule, 8/1/2026)** — never a wall of plain text.
-   Tamika reads these on a phone, often minutes before a client walks in, so the
-   email has to be scannable at a glance. The pattern is set by
-   `app/api/intake/route.ts`, and any new emailed form should follow it:
+9. **EVERY form — external to clients as well as internal to the studio — must arrive
+   well formatted, well organized, and branded (Tamika's standing rule, 8/1/2026,
+   broadened 8/4/2026).** Never a wall of plain text. Internally, Tamika reads these on
+   a phone minutes before a client walks in, so it has to be scannable at a glance.
+   Externally, it is the studio's face — unbranded mail reads as spam or as someone
+   else's system. The pattern is set by `app/api/intake/route.ts`; any new emailed form
+   follows it:
    - Send `html` **and** `text` to Resend, and render both from one shared data
      array so the two can never drift apart.
    - Lead with who it's from; make phone/email tappable (`tel:` / `mailto:`).
@@ -109,6 +111,20 @@ static. Content lives in data files — most requests are edits to these:
    - Studio palette (midnight `#14100a`, gold `#c9a464`, champagne `#e6cd95`) on
      a light readable body; table-based layout with inline styles, since email
      clients ignore modern CSS. Always escape user input into the HTML.
+   - **Branding (required, added 8/4/2026):** Delta Roe logo at the top and a contact
+     footer on every email — address, phone as `tel:`, Info@deltaroe.com as `mailto:`,
+     and hours. Logo assets: `public/emblem.png`, `emblem-transparent.png`, `logo.png`.
+   - ⚠️ **Email images need an ABSOLUTE URL — build it from `SITE.url`** in
+     `lib/site.ts` (already `https://deltaroe.com`). **Never hardcode a `vercel.app`
+     host**; that is the same trap as the Vagaro post-booking redirect in step 4 below.
+     Logos will 404 in email until the DNS cutover, then resolve on their own.
+   - ⚠️ **Assume images are blocked** — many clients disable remote images by default.
+     Give every image real `alt` text, and never put information only in the logo.
+
+   **Status 8/4/2026: not yet met.** The intake email is well formatted but has no logo
+   and no contact footer. Deliberately deferred until after the cutover — do not edit
+   the email template while still debugging why Resend won't deliver, or you won't be
+   able to tell which change caused what.
 
 ## Business facts (mirror of lib/site.ts — that file is authoritative)
 
