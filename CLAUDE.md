@@ -40,8 +40,15 @@ technical experience. When working with her:
   Protection and *not* a login wall — a real browser loads the site normally, so it
   will not block deltaroe.com after cutover. To exercise an API route, load the page in
   a browser and run a same-origin `fetch` from it.
-- **deltaroe.com** still points at the old Wix site until the DNS cutover (see Launch
-  checklist below). Until then, verify all work on the vercel.app URL above.
+- ✅ **deltaroe.com WENT LIVE 8/4/2026 ~8:57pm PT and is now the real site** — verify
+  all work there, not on a vercel.app URL. `www` → **308** → apex. Done by the
+  *pointing* method (root **A** → `216.198.79.1`, **CNAME `www`** →
+  `b6cda3e1b5c01e34.vercel-dns-017.com`, both edited at Wix); nameservers deliberately
+  remain Wix's, because Wix does not permit changing them. Google Workspace MX was
+  never touched and inbound email is confirmed working.
+  ⚠️ **Vercel DNS values are project-specific** — read them off the Vercel domain card,
+  never copy them from a guide. The legacy `76.76.21.21` / `cname.vercel-dns.com` still
+  work but are not what Vercel now recommends.
 - Booking is **on-site at `/book`**, which embeds Vagaro's widget; `bookingUrl` in
   `lib/site.ts` is `/book`. (It formerly pointed at the Wix scheduler.)
 - Publishing a change = commit + push to `main`, then verify the live page after the
@@ -63,7 +70,7 @@ static. Content lives in data files — most requests are edits to these:
 | `lib/chakras.ts` | Chakra data for the sound-chakras page |
 | `lib/bowl-audio.ts` | Shared bowl/glass audio synthesis — used by BOTH `/sound-chakras` and `/the-clearing`; test both pages after touching it |
 | `public/llms.txt` | AI-search business summary — keep in sync with any pricing/service/membership change |
-| `app/api/intake/route.ts` | New-client intake form email delivery (Resend) |
+| `app/api/intake/route.ts` | New-client intake form email delivery (Google Workspace SMTP) |
 | `app/api/chat-log/route.ts` | Roe chat logging; MISS lines = questions Roe couldn't answer = training backlog |
 
 ## Non-negotiable rules
@@ -103,8 +110,8 @@ static. Content lives in data files — most requests are edits to these:
    Externally, it is the studio's face — unbranded mail reads as spam or as someone
    else's system. The pattern is set by `app/api/intake/route.ts`; any new emailed form
    follows it:
-   - Send `html` **and** `text` to Resend, and render both from one shared data
-     array so the two can never drift apart.
+   - Send `html` **and** `text`, rendered from one shared data array so the two can
+     never drift apart.
    - Lead with who it's from; make phone/email tappable (`tel:` / `mailto:`).
    - Anything urgent or safety-related goes in a coloured banner near the top,
      and into the subject line — never buried mid-body.
@@ -120,14 +127,16 @@ static. Content lives in data files — most requests are edits to these:
    - ⚠️ **Email images need an ABSOLUTE URL — build it from `SITE.url`** in
      `lib/site.ts` (already `https://deltaroe.com`). **Never hardcode a `vercel.app`
      host**; that is the same trap as the Vagaro post-booking redirect in step 4 below.
-     Logos will 404 in email until the DNS cutover, then resolve on their own.
+     (Since the 8/4/2026 cutover these resolve correctly — deltaroe.com is live, so
+     logo URLs built from `SITE.url` now work in email.)
    - ⚠️ **Assume images are blocked** — many clients disable remote images by default.
      Give every image real `alt` text, and never put information only in the logo.
 
-   **Status 8/4/2026: not yet met.** The intake email is well formatted but has no logo
-   and no contact footer. Deliberately deferred until after the cutover — do not edit
-   the email template while still debugging why Resend won't deliver, or you won't be
-   able to tell which change caused what.
+   **Status 8/4/2026: still not met, but now unblocked.** The intake email is well
+   formatted but has no logo and no contact footer. It was deferred while delivery was
+   broken (changing the template mid-debug makes it impossible to tell which change
+   caused what). **Delivery works as of 8/4/2026 and deltaroe.com is live, so the logo
+   URLs will resolve — this is the next job on this rule.**
 
 ## Business facts (mirror of lib/site.ts — that file is authoritative)
 
@@ -160,18 +169,35 @@ removed items (master classes, 4th session, bi-weekly coaching, quarterly panels
   word-shards, gather golden word-motes into a singing bowl, chain-break finale with
   ascending chakra tones. No timer, no score, nothing ever lost. Reduced-motion +
   keyboard accessible. Uses "friend" endearment.
-- **/intake:** 5-step new-client form → `/api/intake` → email to Info@deltaroe.com via
-  Resend (`RESEND_API_KEY` env var in Vercel). Reply-to = the client; ⚠ in the subject
-  when safety flags are checked. Includes consent/scope/cancellation/18+/e-signature
-  clauses and points at the live menu instead of hard-coding fees. There is also a
-  print-blank version for the studio clipboard.
-  **Sender (handed over 8/1/2026):** `web@mail.deltaroe.com`, sent through Tamika's
-  own Resend account. Only **DKIM** is verified on that domain — Wix's DNS cannot
-  host an MX record on a subdomain, so Resend's bounce-feedback MX was deliberately
-  skipped and the domain shows "pending" for SPF/MX in the Resend dashboard. That is
-  expected, not a bug: sending works, but bounce/complaint feedback is not collected.
-  If DNS ever moves off Wix (e.g. to Cloudflare at the deltaroe.com cutover), add the
-  MX record `send.mail` → `feedback-smtp.us-east-1.amazonses.com` to complete it.
+- **/intake:** 5-step new-client form → `/api/intake` → email to Info@deltaroe.com.
+  Reply-to = the client; ⚠ in the subject when safety flags are checked. Includes
+  consent/scope/cancellation/18+/e-signature clauses and points at the live menu
+  instead of hard-coding fees. There is also a print-blank version for the studio
+  clipboard. Protected by a honeypot field, a 3-second dwell-time check, and a per-IP
+  rate limit (5 per 10 min).
+
+  **Delivery = Google Workspace SMTP (since 8/4/2026).** Env vars `SMTP_USER`
+  (`tamika@deltaroe.com`) and `SMTP_PASS` (a Google **app password**, requires 2-step
+  verification). Recipient is `INTAKE_TO`, defaulting to Info@deltaroe.com. ⚠️ **Both
+  SMTP vars must be set** — with only one, the route silently falls back to Resend and
+  502s. Env changes need a **redeploy**.
+
+  **🛑 RESEND IS A DEAD END WHILE DNS IS AT WIX — do not retry it.** Settled
+  8/4/2026 after most of a night. Resend requires an **MX on a subdomain**
+  (`send.mail.deltaroe.com`) for its bounce return-path; their docs confirm it is
+  mandatory and that "custom return path" only changes *which* subdomain needs it.
+  Wix blocks every route out: **no subdomain MX, no nameserver change, and NS records
+  are not editable**, so the subdomain cannot even be delegated. Resend returns
+  *"The mail.deltaroe.com domain is not verified"* and the route 502s. The Resend code
+  path is deliberately kept as a fallback: if the domain is ever transferred off Wix
+  and the MX added, clear the SMTP vars and it resumes with no code change.
+
+  ⚠️ **Known quirk, not a fault:** mail is sent *from* tamika@deltaroe.com *to*
+  Info@deltaroe.com, which is an alias onto that same mailbox — so Google files it
+  under **Sent**, not Inbox. Verified 8/4/2026 by routing one test to an external
+  address, where it arrived normally. **Delivery works; only visibility is imperfect.**
+  The clean fix is an external sender — **Postmark** fits inside Wix's limits because
+  it uses a CNAME (`pm_bounces` → `pm.mtasv.net`) + DKIM TXT instead of an MX.
 
 ## Launch checklist (state as of late July 2026)
 
@@ -189,42 +215,22 @@ and lives in exactly one place: the "How healing happens here" section of
 `app/page.tsx`. It is not echoed elsewhere, so it is a single-file edit if ever revised.
 
 Then, in order:
-0. ⚠️ **`RESEND_API_KEY` must be correct in the CURRENT Vercel project.** Still broken
-   as of **8/4/2026** — retested that evening: an identical POST to `/api/intake`
-   returned **502 on the new project** and **`{"ok":true}` on the old one**. A 502
-   means a key exists but Resend rejects it; 503 means none is set. Symptom for a real
-   client: *"delivery failed — please call the studio"*, and the submission is lost
-   (it survives only in the function logs). **Env var changes need a redeploy to take
-   effect.** Re-test by POSTing a sample payload before launch — do not assume.
+0. ✅ **RESOLVED 8/4/2026 — the intake form sends.** `POST /api/intake` returns
+   `{"ok":true}` and the function log shows `[intake] sent via smtp <…>` with a real
+   Message-ID issued by Google. Delivery moved from Resend to **Google Workspace SMTP**
+   (see the /intake entry above for why Resend can never work on Wix DNS).
 
-   **⚠️ The old project's `{"ok":true}` proves NOTHING about `mail.deltaroe.com`.**
-   Retracted the same evening, 8/4/2026: Tamika reported the resulting email arrived
-   **from `web@send.robbjack.com`** — the previous developer's own Resend account and
-   domain. That deployment is running *pre-handover* code, so its success says nothing
-   about whether Delta Roe's own domain can send. (The reasoning that it "postdates the
-   sender-change commit because its contact page says Tuesday" was worthless — the old
-   Mon–Wed hours listed Tuesday too.)
+   **How to verify it still works:** POST a sample payload to `/api/intake`, then read
+   the Vercel function logs. `[intake] sent via smtp` = healthy. **A 200 alone is not
+   proof** — that mistake was made repeatedly on 8/4; always confirm from the log or
+   the received message, never from the status code.
 
-   **So the cause is still genuinely OPEN — do not assert either way:**
-   - Most likely: the new project inherited **the previous developer's Resend key**,
-     which cannot send from `mail.deltaroe.com` because his account does not own that
-     domain. That alone explains the 502, and the fix is just Tamika's own key.
-   - Still possible: `mail.deltaroe.com` is not verified enough to send, in which case
-     the missing MX **does** matter and moving DNS off Wix may be required after all.
-
-   **The one test that distinguishes them:** put a key from *Tamika's own* Resend
-   account into the new project, redeploy, POST to `/api/intake`, then confirm the
-   received email's **From** address is `web@mail.deltaroe.com`. **Always check the
-   From address — a 200 alone is not proof of anything.**
-
-   **Beware of flip-flopping here.** Three confident claims have now been made without
-   adequate testing: "partial verification is fine" (8/1), "Resend refuses to send"
-   (8/1), and "DKIM+SPF is proven sufficient" (8/4). Each sounded settled at the time.
-   Run the test above; do not reason about it.
-
-   To find the precise Resend error, read the Vercel function logs for the
-   `[intake] SEND FAILED` line — the route logs the real message but deliberately does
-   not return it to the browser.
+   **Hard-won lesson, worth keeping:** four confident claims were made here across
+   8/1–8/4 without adequate testing — "partial verification is fine", "Resend refuses
+   to send", "DKIM+SPF is proven sufficient", and "the old project's 200 proves the
+   domain sends" (it didn't; that email arrived from the previous developer's
+   `web@send.robbjack.com`, because that deployment runs pre-handover code). Every one
+   sounded settled at the time. **Test it; don't reason about it.**
 1. **Vagaro** setup (booking, deposits, gift cards, memberships). **Square is dead —
    do not revisit it.** Square declined the merchant account after review (fallout
    from a stolen card, unresolved actions). Fresha was considered and dropped: its
