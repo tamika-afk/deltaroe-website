@@ -285,9 +285,62 @@ export async function POST(req: Request) {
     </td></tr>
   </table></body></html>`;
 
+  const subject = `New client intake — ${name}${safetyFlags.length ? " ⚠ safety flags" : ""}`;
+
+  // --- Delivery (rewritten 8/4/2026) ------------------------------------------
+  // PRIMARY: Google Workspace SMTP. WHY, so nobody "fixes" this back to Resend:
+  // Resend requires an MX record on a subdomain (send.mail.deltaroe.com) for its
+  // bounce return-path, and **Wix's DNS cannot host one**. Wix also refuses to
+  // change nameservers and refuses to add NS records, so the subdomain can't
+  // even be delegated elsewhere. Resend therefore can NEVER verify this domain
+  // while DNS lives at Wix — it is a dead end, not a slow one. Google already
+  // handles mail for deltaroe.com, so SMTP needs no DNS changes whatsoever.
+  //
+  // FALLBACK: the original Resend path is kept intact below. If the domain is
+  // ever transferred off Wix and the MX added, clear SMTP_USER/SMTP_PASS in
+  // Vercel and Resend resumes — no code change needed.
+  //
+  // Required Vercel env vars: SMTP_USER (Info@deltaroe.com) and SMTP_PASS (a
+  // Google *app password*, which needs 2-step verification enabled on the
+  // account — a normal password will not work). SMTP_HOST/SMTP_PORT are
+  // optional overrides.
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
+
+  if (smtpUser && smtpPass) {
+    try {
+      // Imported dynamically so the dependency is only loaded on a real send,
+      // keeping cold starts light for every other route.
+      const nodemailer = (await import("nodemailer")).default;
+      const port = Number(process.env.SMTP_PORT || 465);
+      const transport = nodemailer.createTransport({
+        host: process.env.SMTP_HOST || "smtp.gmail.com",
+        port,
+        secure: port === 465, // 465 = implicit TLS; 587 would use STARTTLS
+        auth: { user: smtpUser, pass: smtpPass },
+      });
+      // Gmail rewrites From to the authenticated account, so send as that
+      // address rather than a vanity one that would be silently replaced.
+      // reply-to still points at the client so replying reaches them directly.
+      const info = await transport.sendMail({
+        from: `Delta Roe Website <${smtpUser}>`,
+        to: "Info@deltaroe.com",
+        replyTo: email || undefined,
+        subject,
+        html,
+        text,
+      });
+      console.log(`[intake] sent via smtp ${info.messageId} for ${name}`);
+      return Response.json({ ok: true });
+    } catch (e) {
+      console.error("[intake] SMTP SEND FAILED — submission follows:\n" + text, e);
+      return Response.json({ ok: false, error: "delivery failed — please call the studio" }, { status: 502 });
+    }
+  }
+
   const key = process.env.RESEND_API_KEY;
   if (!key) {
-    console.error("[intake] RESEND_API_KEY missing — submission logged only:\n" + text);
+    console.error("[intake] no SMTP_USER/SMTP_PASS and no RESEND_API_KEY — submission logged only:\n" + text);
     return Response.json(
       { ok: false, error: "form delivery is not configured — please call the studio" },
       { status: 503 },
@@ -302,7 +355,7 @@ export async function POST(req: Request) {
         from: "Delta Roe Website <web@mail.deltaroe.com>",
         to: ["Info@deltaroe.com"],
         reply_to: email || undefined,
-        subject: `New client intake — ${name}${safetyFlags.length ? " ⚠ safety flags" : ""}`,
+        subject,
         html,
         text,
       }),
