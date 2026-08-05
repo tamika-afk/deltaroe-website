@@ -1,12 +1,21 @@
-// Client intake submissions → emailed to the studio inbox (Info@deltaroe.com)
-// with reply-to set to the client. Requires RESEND_API_KEY in the environment;
-// without it the route fails safe with a call-the-studio message (and logs the
-// submission to the function logs as a last-resort backstop — filter
-// "[intake]"). Sends from mail.deltaroe.com, verified in Delta Roe's own
-// Resend account. Note: only DKIM is verified there — Wix's DNS can't host an
-// MX record on a subdomain, so Resend's bounce-feedback MX was skipped and the
-// domain shows "pending" for SPF/MX. Sending is unaffected; bounce/complaint
-// feedback is not collected automatically.
+// Client intake submissions → emailed to the studio inbox, reply-to set to the
+// client so replying reaches them directly.
+//
+// Delivery goes over **Google Workspace SMTP** (SMTP_USER + SMTP_PASS). Google
+// already handles mail for deltaroe.com, so this needs no DNS records at all.
+//
+// ⚠️ Resend is kept below only as a fallback and CANNOT work while this domain's
+// DNS is at Wix — an earlier version of this comment claimed sending was
+// unaffected by the missing MX, and that was WRONG. Resend requires an MX on
+// send.mail.deltaroe.com for its bounce return-path; Wix cannot host a subdomain
+// MX, cannot change nameservers, and will not let you edit NS records, so the
+// subdomain can't be delegated either. Resend returns "The mail.deltaroe.com
+// domain is not verified" and the route 502s. Don't re-test it — fix the DNS
+// first, or leave SMTP in place.
+//
+// If neither is configured the route fails safe with a call-the-studio message
+// and dumps the whole submission to the function logs as a last-resort backstop
+// (filter "[intake]").
 //
 // The email goes out as HTML with a plain-text alternative. Both are rendered
 // from the same `sections` array below, so they can never drift apart — add a
@@ -307,6 +316,14 @@ export async function POST(req: Request) {
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
 
+  // Where intake forms land. Defaults to the studio inbox, but is overridable
+  // because Info@deltaroe.com is an alias/forward rather than its own mailbox:
+  // the SMTP login is Tamika's real account (tamika@deltaroe.com). If Info@ is
+  // ever a Google *Group* and the sending account is a member of it, Google can
+  // decline to deliver the sender their own message and the email disappears
+  // with no error. If that happens, set INTAKE_TO to the real mailbox.
+  const intakeTo = process.env.INTAKE_TO || "Info@deltaroe.com";
+
   if (smtpUser && smtpPass) {
     try {
       // Imported dynamically so the dependency is only loaded on a real send,
@@ -324,7 +341,7 @@ export async function POST(req: Request) {
       // reply-to still points at the client so replying reaches them directly.
       const info = await transport.sendMail({
         from: `Delta Roe Website <${smtpUser}>`,
-        to: "Info@deltaroe.com",
+        to: intakeTo,
         replyTo: email || undefined,
         subject,
         html,
@@ -353,7 +370,7 @@ export async function POST(req: Request) {
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: "Delta Roe Website <web@mail.deltaroe.com>",
-        to: ["Info@deltaroe.com"],
+        to: [intakeTo],
         reply_to: email || undefined,
         subject,
         html,
