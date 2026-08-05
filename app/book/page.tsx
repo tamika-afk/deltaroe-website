@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE } from "@/lib/site";
 import VagaroWidget from "./VagaroWidget";
 
@@ -43,6 +44,17 @@ export default function BookPage() {
             you need? Call or text{" "}
             <a href={SITE.phoneHref}>{SITE.phone}</a> and we&rsquo;ll take care
             of it.
+          </p>
+          {/* The cancellation terms belong where money is committed, not only
+              on the policy page. Keep this wording identical to /policies,
+              lib/faqs.ts, lib/roe-kb.ts and the intake consent checkbox. */}
+          <p style={{ fontSize: 14, opacity: 0.75, lineHeight: 1.75, marginTop: 14 }}>
+            <strong>Before you book:</strong> rescheduling is free with 24
+            hours&rsquo; notice. Inside 24 hours it&rsquo;s 50% of the session,
+            and a no-show is the full amount — Delta Roe is one person holding
+            one room, and that hour is kept for you alone. Genuine emergencies
+            are handled by a human being, not a rule. Read the full{" "}
+            <Link href="/policies">cancellation &amp; refund policy</Link>.
           </p>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -49,6 +50,18 @@ export default function GiftCardsPage() {
             To purchase a gift card, call the studio or send an email — we&rsquo;ll
             arrange it same-day and include a personal note. Online instant
             gift cards are coming soon.
+          </p>
+          {/* California Civil Code 1749.5 makes expiry dates and dormancy /
+              service / inactivity fees unlawful on gift certificates sold in
+              California, and requires cash redemption of small balances — that
+              threshold rose from $10 to $15 in April 2026. Stating it plainly
+              is both accurate and reassuring. Never add an expiry or a fee. */}
+          <p style={{ color: "var(--muted)", maxWidth: 520, margin: "0 auto 24px", fontSize: 16 }}>
+            Delta Roe gift cards <strong>never expire</strong> and carry no fees
+            of any kind. If a balance falls below $15 you may ask for it back in
+            cash, as California law provides. Gift cards aren&rsquo;t refundable,
+            and sessions booked with one follow the usual{" "}
+            <Link href="/policies">cancellation policy</Link>.
           </p>
           <a
             className="btn btn-solid"

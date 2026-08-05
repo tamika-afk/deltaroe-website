@@ -106,6 +106,34 @@ export default function MembershipsPage() {
             pricing — joining the list locks your rate. Questions? Call{" "}
             <a href={SITE.phoneHref}>{SITE.phone}</a>.
           </p>
+          {/* Auto-renewal disclosure. California's Automatic Renewal Law
+              (amended 1 July 2025) requires the renewal terms, billing
+              frequency, price and cancellation method to be disclosed clearly
+              and conspicuously *next to* the signup action — not buried in a
+              terms page — with affirmative consent, a retainable confirmation,
+              and annual reminders.
+              ⚠️ Right now these CTAs are mailto: links, so signup is not yet
+              online. THE DAY membership signup becomes an online checkout, the
+              law also requires cancellation to be possible online, at will,
+              without obstruction — no "call us to cancel" gate. */}
+          <p
+            style={{
+              marginTop: 18,
+              color: "var(--muted)",
+              fontSize: 15,
+              textAlign: "center",
+              maxWidth: 640,
+              margin: "18px auto 0",
+            }}
+          >
+            <strong>How billing works:</strong> memberships are charged monthly at the
+            price shown and renew automatically until you cancel. You can{" "}
+            <strong>cancel at any time — no fee, no notice period, no phone call
+            required</strong>. Cancelling stops the next payment; the month you have
+            already paid for stays yours to use in full. The Soulful Journey is a
+            12-month program billed monthly. Full terms are in the{" "}
+            <Link href="/policies">cancellation &amp; refund policy</Link>.
+          </p>
         </div>
       </section>
 

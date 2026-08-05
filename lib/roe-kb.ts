@@ -120,7 +120,7 @@ export const KB: KbEntry[] = [
     keywords: ["membership", "subscription", "monthly", "member", "sanctuary", "circle", "plan"],
     boost: ["membership", "subscription", "monthly"],
     answer:
-      "Three ways to make healing a rhythm instead of a rescue: The Sanctuary Circle ($33/mo, fully virtual — live monthly sound bath, the recorded 432 Hz library, new meditations); The Ritual Membership ($129/mo — a session every month, your choice, with rollover and 10% off everything); and The Soulful Journey ($399/mo — the 12-month transformation container). One session feels wonderful. A practice changes your life.",
+      "Three ways to make healing a rhythm instead of a rescue: The Sanctuary Circle ($33/mo, fully virtual — live monthly sound bath, the recorded 432 Hz library, new meditations); The Ritual Membership ($129/mo — a session every month, your choice, with rollover and 10% off everything); and The Soulful Journey ($399/mo — the 12-month transformation container). All bill monthly and renew automatically until you cancel; you can cancel any time with no fee and no notice period, and the month you've already paid for stays yours to use. One session feels wonderful. A practice changes your life.",
     link: { href: "/memberships", label: "Compare memberships" },
     chips: ["Tell me about the Soulful Journey", "Is the Ritual Membership worth it?", "What's in the Ritual Box?"],
   },
@@ -167,7 +167,7 @@ export const KB: KbEntry[] = [
     keywords: ["gift", "card", "certificate", "present", "mom", "birthday", "anniversary", "wife", "husband", "friend"],
     boost: ["gift"],
     answer:
-      "A Delta Roe gift card says 'I see how much you're carrying' better than anything wrapped in a box. The $77 sound bath is the perfect gift for someone who 'can't relax'; $144 gives a full reiki session. Call (916) 206-1752 or email Info@deltaroe.com — same-day arrangement with a personal note included.",
+      "A Delta Roe gift card says 'I see how much you're carrying' better than anything wrapped in a box. The $77 sound bath is the perfect gift for someone who 'can't relax'; $144 gives a full reiki session. They never expire and carry no fees — California law doesn't allow either. Call (916) 206-1752 or email Info@deltaroe.com — same-day arrangement with a personal note included.",
     link: { href: "/gift-cards", label: "Gift card options" },
     chips: ["Can I book a group event?", "What services do you offer?"],
   },
@@ -238,7 +238,7 @@ export const KB: KbEntry[] = [
     keywords: ["cancel", "reschedule", "late", "policy", "refund", "miss"],
     boost: ["cancel", "reschedule", "policy"],
     answer:
-      "Life happens — just give the studio as much notice as you can, ideally 24 hours, by phone at (916) 206-1752 or through your booking confirmation. And a loving nudge from the FLY Queen playbook: reschedule, don't cancel. The week you're 'too busy' for your session is exactly the week you need it.",
+      "Reschedule free with 24 hours' notice — and a loving nudge from the FLY Queen playbook: reschedule, don't cancel. The week you're 'too busy' for your session is exactly the week you need it. Inside 24 hours it's 50% of the session, and a no-show is the full amount; Delta Roe is one person holding one room, and that hour was held for you. Real emergencies are handled by a human being, not a rule — call (916) 206-1752. Refunds come back as studio credit, which never expires.",
     chips: ["How do I book?", "What are your hours?"],
   },
   {

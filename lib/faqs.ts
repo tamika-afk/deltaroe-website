@@ -111,7 +111,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       },
       {
         q: "What if I need to cancel or reschedule?",
-        a: "Life happens — just give the studio as much notice as you can, ideally 24 hours, by phone at (916) 206-1752 or through your booking confirmation link. Rescheduling is always preferred over cancelling: your nervous system still needs that hour.",
+        a: "Rescheduling is free with 24 hours' notice, and rescheduling beats cancelling every time — your nervous system still needs that hour. Inside 24 hours it's 50% of the session, and a no-show is the full amount, because Delta Roe is one person holding one room and that hour was kept for you. Genuine emergencies are handled by a human, not a rule: call (916) 206-1752. Full terms are on the policies page.",
       },
       {
         q: "Do you offer gift cards?",

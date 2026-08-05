@@ -365,7 +365,10 @@ export default function IntakeForm() {
             <label className={s.check}><input type="checkbox" checked={f.ackNoGuarantee} onChange={(e) => set("ackNoGuarantee", e.target.checked)} />
               <span>No specific outcomes have been promised, and I voluntarily participate, releasing Delta Roe from liability for my own health decisions except as provided under applicable California law. *</span></label>
             <label className={s.check}><input type="checkbox" checked={f.ackCancellation} onChange={(e) => set("ackCancellation", e.target.checked)} />
-              <span>I&apos;ll give at least 24 hours&apos; notice to reschedule or cancel whenever possible. *</span></label>
+              <span>
+                I understand the cancellation policy: rescheduling is free with 24 hours&apos; notice,
+                cancelling inside 24 hours is 50% of the session, and a no-show is the full amount. *
+              </span></label>
             <label className={s.check}><input type="checkbox" checked={f.ackAdult} onChange={(e) => set("ackAdult", e.target.checked)} />
               <span>I am 18 or older (or a parent/guardian completing this for a minor with my consent). *</span></label>
             <div className={s.optRow}>

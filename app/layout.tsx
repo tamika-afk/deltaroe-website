@@ -177,6 +177,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Link href="/shop">The Apothecary</Link>
                 <Link href="/journal">The Journal</Link>
                 <Link href="/contact">Contact</Link>
+                <Link href="/policies">Cancellation &amp; Refunds</Link>
                 <Link href="/review" style={{ color: "var(--gold-bright)" }}>
                   Love your session? Review us
                 </Link>

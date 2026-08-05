@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/shop",
     "/journal",
     "/contact",
+    "/policies",
   ].map((p) => ({
     url: `${SITE.url}${p}`,
     changeFrequency: "weekly" as const,
