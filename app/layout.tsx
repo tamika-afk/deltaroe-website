@@ -40,6 +40,14 @@ export const metadata: Metadata = {
     images: ["/logo.png"],
   },
   icons: { icon: "/logo.png", apple: "/logo.png" },
+  // Google Search Console ownership for the https://deltaroe.com property.
+  // ⚠️ Verification via Google Analytics was TRIED and REJECTED: Search Console
+  // requires the gtag snippet in <head>, and next/script puts it in <body>.
+  // This meta tag is the supported route and survives redeploys. Removing it
+  // un-verifies the property, which silently stops sitemap and indexing
+  // reporting — leave it in place. The separate https://www.deltaroe.com
+  // property predates this and is verified by other means.
+  verification: { google: "Xp8E8DTqcLlYcgMQT5zJ8sVb2cT-w2oeLLWsVMoyaNs" },
 };
 
 // One connected graph: the business, and Tamika as a first-class entity —
