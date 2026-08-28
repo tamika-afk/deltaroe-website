@@ -19,6 +19,10 @@
 const VAGARO = "https://*.vagaro.com https://www.vagaro.com";
 const ANALYTICS =
   "https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com";
+// The Apothecary talks to Shopify's Storefront API from the browser (cart
+// create/add/update) and loads product imagery from Shopify's CDN. Checkout
+// then navigates to the store's own hosted checkout.
+const SHOPIFY = "https://delta-roe.myshopify.com https://cdn.shopify.com";
 
 // Enforced. Each of these is safe on any ordinary site:
 //   frame-ancestors — stops other sites embedding us (clickjacking on /book)
@@ -36,9 +40,9 @@ const REPORT_ONLY_CSP = [
   `style-src 'self' 'unsafe-inline' ${VAGARO}`,
   "img-src 'self' data: blob: https:",
   `font-src 'self' data: ${VAGARO}`,
-  `connect-src 'self' ${VAGARO} ${ANALYTICS} https://vitals.vercel-insights.com`,
+  `connect-src 'self' ${VAGARO} ${ANALYTICS} ${SHOPIFY} https://vitals.vercel-insights.com`,
   `frame-src 'self' ${VAGARO}`,
-  `form-action 'self' ${VAGARO}`,
+  `form-action 'self' ${VAGARO} ${SHOPIFY}`,
   "frame-ancestors 'self'",
   "base-uri 'self'",
   "object-src 'none'",
