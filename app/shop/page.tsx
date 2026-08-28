@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { jsonLd } from "@/lib/jsonld";
 import { getProducts, isPurchasable } from "@/lib/shopify";
 import { SITE } from "@/lib/site";
 import ShopClient from "./ShopClient";
@@ -55,8 +56,43 @@ export default async function ShopPage() {
     );
   }
 
+  // An ItemList tells Google the shop is a collection and names every member
+  // with its own URL, so the individual product pages get discovered from here
+  // rather than waiting on the sitemap alone.
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${SITE.url}/shop#collection`,
+    name: "The Delta Roe Apothecary",
+    description:
+      "Candles, ritual tea, sacred soap, apparel and books from the Delta Roe studio in Elk Grove, California.",
+    url: `${SITE.url}/shop`,
+    isPartOf: { "@id": `${SITE.url}/#business` },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: products.length,
+      itemListElement: products.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: p.title,
+        url: `${SITE.url}/shop/${p.handle}`,
+      })),
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+      { "@type": "ListItem", position: 2, name: "The Apothecary", item: `${SITE.url}/shop` },
+    ],
+  };
+
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(collectionSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbSchema) }} />
       <ShopClient products={products} />
     </main>
   );

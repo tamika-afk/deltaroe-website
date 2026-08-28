@@ -11,6 +11,7 @@
 // cart. That gate is Tamika's switch: remove the tag in Shopify and the product
 // goes on sale within ~5 minutes, with no deploy. See lib/shopify.ts.
 
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { isPurchasable, groupByType, type ShopProduct, type ShopVariant } from "@/lib/shopify";
 import { addToCart, loadCart, setLineQuantity, type Cart } from "@/lib/shopify-cart";
@@ -60,7 +61,9 @@ function ProductCard({
 
   return (
     <article className="product-card">
-      <div className={product.image ? "product-art has-photo" : "product-art"}>
+      {/* The image and title link to /shop/[handle]. Each product having its
+          own crawlable URL is what lets it rank in Google at all. */}
+      <Link href={`/shop/${product.handle}`} className={product.image ? "product-art has-photo" : "product-art"}>
         {!sellable && <span className="product-badge">Coming Soon</span>}
         {product.image ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -68,10 +71,12 @@ function ProductCard({
         ) : (
           <Mark />
         )}
-      </div>
+      </Link>
       <div className="product-body">
         <div className="product-head">
-          <h3>{product.title}</h3>
+          <h3>
+            <Link href={`/shop/${product.handle}`}>{product.title}</Link>
+          </h3>
           <span className="product-price">{money(variant?.price ?? product.price)}</span>
         </div>
         <p className="product-desc">{product.description}</p>

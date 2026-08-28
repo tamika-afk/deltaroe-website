@@ -2,8 +2,13 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { SERVICES } from "@/lib/services";
 import { ARTICLES } from "@/lib/journal";
+import { getProductHandles } from "@/lib/shopify";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// The sitemap now reaches out to Shopify for product handles, so it can no
+// longer be a pure function. If Shopify is unreachable, getProductHandles
+// returns [] and the sitemap still renders every other page — a missing
+// product section is survivable, a 500 on /sitemap.xml is not.
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages = [
     "",
     "/book",
@@ -43,5 +48,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...servicePages, ...articlePages];
+  const productPages = (await getProductHandles()).map((handle) => ({
+    url: `${SITE.url}/shop/${handle}`,
+    changeFrequency: "daily" as const,
+    // Below services (0.9) — the studio's sessions are still the business —
+    // but above the general static pages, since these are the newest content
+    // and the ones we most want crawled promptly.
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...servicePages, ...articlePages, ...productPages];
 }

@@ -178,6 +178,28 @@ export async function getProducts(): Promise<ShopProduct[]> {
   return data.products.edges.map((e) => normalise(e.node));
 }
 
+/** One product by its Shopify handle — the /shop/[handle] page. */
+export async function getProduct(handle: string): Promise<ShopProduct | null> {
+  const data = await storefront<{ product: RawProduct | null }>(
+    `query Product($handle: String!) { product(handle: $handle) { ${PRODUCT_FIELDS} } }`,
+    { handle },
+  );
+  return data?.product ? normalise(data.product) : null;
+}
+
+/**
+ * Handles for static generation and the sitemap.
+ *
+ * Kept deliberately cheap — a full getProducts() would pull every image and
+ * variant just to read a string, and this runs on every build and sitemap hit.
+ */
+export async function getProductHandles(): Promise<string[]> {
+  const data = await storefront<{ products: { edges: { node: { handle: string } }[] } }>(
+    `query { products(first: 50) { edges { node { handle } } } }`,
+  );
+  return data?.products?.edges?.map((e) => e.node.handle) ?? [];
+}
+
 /**
  * Can a customer actually buy this today?
  *

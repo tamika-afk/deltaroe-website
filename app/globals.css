@@ -1741,3 +1741,30 @@ th.num {
   object-fit: cover;
   display: block;
 }
+
+/* Product detail page (/shop/[handle]) — image beside the buy panel on desktop,
+   stacked on mobile. Mirrors .shop-grid's auto-collapsing approach. */
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .product-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
+/* Product titles are links now that each item has its own page — keep them
+   looking like headings, not like body links. */
+.product-head h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-head h3 a:hover {
+  color: var(--gold-bright);
+}
