@@ -1,7 +1,10 @@
-// TODO: replace with the real Google review short-link once the Google Business
-// Profile is verified — in the GBP dashboard click "Ask for reviews" and copy the
-// https://g.page/r/…/review link (see docs/gbp-kit.md, section 8).
-export const REVIEW_URL = "https://g.page/r/REPLACE_ME/review";
+// Google review link, built from the Business Profile Place ID
+// (ChIJo6PIO0_HmoARCHeap6jj6js - decoded from the Maps listing URL and verified to
+// resolve to "Delta Roe Institute of Wellness", 9075 Elk Grove Blvd Ste 220).
+// Opens the review box directly instead of the listing page. The GBP
+// "Ask for reviews" g.page short-link is an equivalent alternative if preferred.
+export const REVIEW_URL =
+  "https://search.google.com/local/writereview?placeid=ChIJo6PIO0_HmoARCHeap6jj6js";
 
 export const YELP_URL = "https://www.yelp.com/biz/delta-roe-elk-grove";
 
