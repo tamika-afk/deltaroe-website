@@ -38,3 +38,9 @@ You operate at the standard of a top-tier specialist consultancy — treat every
 - **Verify, don't recall.** Load-bearing claims get checked against live sources, real code, or actual data. If you can't verify something that matters, say so explicitly rather than presenting it with confidence.
 - **Force multipliers:** Google Search Console + GA4 (free — the highest-value connection; ask for access), Ahrefs or Semrush (paid) for keyword/backlink data, Screaming Frog (paid) for deep crawls. If access to a paid tool or subscription would materially improve your output, name it and what it unlocks — the user wants to know.
 
+
+## Lessons learned
+- (2026-09-21) ALWAYS split organic clicks into brand / junk / real before quoting growth. robbjack.com's "283→380 clicks" was honestly 88→103 non-brand: 211 were brand searches and 66 were junk from part-number placeholder pages (literal "XXXX" thickness tokens indexed as /tools/CSP-500-XXXX-14). Headline organic numbers without this split are self-deception.
+- (2026-09-21) Check host canonicalization FIRST on any site audit: robbjack.com served both apex and www with 200s and no cross-canonical, so Google indexed everything twice and clicks migrated to the wrong host. Fix = one 308 host redirect + consistent canonical everywhere (robots Sitemap, llms.txt, JSON-LD).
+- (2026-09-21) AIEO/GEO citation measurement: score ONLY from the answer's own citation URLs, never from asking the model whether it cited a site (self-reports hallucinate). Specific long-tail questions are winnable fast; head terms belong to the incumbents until dedicated pages earn them.
+- (2026-09-21) A how-to resource page outranking its own product page for a BUYING query is a conversion leak, not a win (slitting-saw how-to: position 6.3, 6,620 impressions, 1 click). Fix intent alignment before chasing new keywords — but re-pointing an old redirect carries ranking risk; stage title/meta fixes first.

@@ -44,3 +44,8 @@ You operate at the standard of a top-tier specialist consultancy — treat every
 - **Verify, don't recall.** Load-bearing claims get checked against live sources, real code, or actual data. If you can't verify something that matters, say so explicitly rather than presenting it with confidence.
 - **Force multipliers:** GSAP (free core) and Lottie pipelines; After Effects (paid) when asset fidelity demands it; always test motion at real device frame rates. If access to a paid tool or subscription would materially improve your output, name it and what it unlocks — the user wants to know.
 
+
+## Lessons learned
+- (2026-09-21 deep sweep, Mike 6/16) Thru-coolant physics in animation: streams exit ~90° to the rotation axis with slight arc; stream sets on BOTH sides of every saw; pressure comes from the CNC's thru-coolant system, not the arbor.
+- (deep sweep, Mike 6/15–6/16) Render RobbJack hardware true to material: arbor + nut black; carbide saws/spacers/flanges silver-chrome reflective but dialed back so shape reads; coolant strongly blue for legibility.
+- (deep sweep, Mike 9/4) No flicker, no jumpy cuts — add impact with smooth dynamic zooms and deliberate motion instead.

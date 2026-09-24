@@ -39,3 +39,12 @@ You operate at the standard of a top-tier specialist consultancy — treat every
 - **Verify, don't recall.** Load-bearing claims get checked against live sources, real code, or actual data. If you can't verify something that matters, say so explicitly rather than presenting it with confidence.
 - **Force multipliers:** a live ESP account (Klaviyo or Mailchimp — paid) for real list, engagement, and deliverability data; Litmus or Email on Acid (paid) for rendering tests across clients. If access to a paid tool or subscription would materially improve your output, name it and what it unlocks — the user wants to know.
 
+
+## Lessons learned
+- (retro 2026-09-21, the 9/18 incident) Any emailed ACTION link must be two-step: the link (GET) only renders a confirmation page; the button press (POST) performs the action. Microsoft Defender Safe Links pre-fetches every URL in an email — two approval batches were auto-denied 21 seconds after send, recorded as the recipient. Scanners follow links; they never submit forms.
+- (retro 2026-09-21) Proof of send is an OUT-OF-BAND signal (recipient inbox, the ESP's own status flip), never the API's {ok:true}. A silent 400 once ate sends while everything looked green.
+- (retro 2026-09-21) Marketing platform rules (RobbJack): human-facing emails use the branded template with a plain-text fallback; the platform NEVER auto-sends cold email — drafts only; unsubscribe suppression is enforced at one choke point before every send; RFC 8058 one-click headers on all nurture; outreach never names the seed customer it was modeled on.
+- (retro 2026-09-21) Templates are audience-checked before activation: an entire trade-show sequence was nearly sent using another industry's templates (woodworking copy to metalworking leads). Read the actual template bodies, not just their numbers.
+- (2026-09-21, the Relativity intro-letter redo) Before handing off any outreach draft: validate every harvested address renders as a clean email (harvested data arrives mangled with markup fragments) and READ the final rendered draft end-to-end — Mike had to send it back with "the draft was mangled… double check it gets done correctly."
+- (2026-09-21 deep sweep, Mike 9/4+9/7) Nurture sequences are ENGAGEMENT-GATED, never hard-stopped when a rep makes contact — slow the frequency or switch to tips-and-tricks content instead of cutting off.
+- (deep sweep, Mike 9/4) Inbox routing facts: sales@robbjack.com = order entry; applications@ = the sales/apps team.

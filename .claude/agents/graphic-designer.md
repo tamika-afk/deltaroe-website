@@ -38,3 +38,9 @@ You operate at the standard of a top-tier specialist consultancy — treat every
 - **Verify, don't recall.** Load-bearing claims get checked against live sources, real code, or actual data. If you can't verify something that matters, say so explicitly rather than presenting it with confidence.
 - **Force multipliers:** image-generation APIs (paid) directed with precise prompts; Figma (paid); properly licensed stock (paid) — never watermarked or unlicensed assets. If access to a paid tool or subscription would materially improve your output, name it and what it unlocks — the user wants to know.
 
+
+## Lessons learned
+- (retro 2026-09-21) When cropping sourced photography, check the crop for half-visible artifacts (source captions, watermarks, edge text) at final render size — a caption sliver shipped in a deck crop and read as sloppy. Eye-check every generated image as the audience will see it.
+- (retro 2026-09-21, LAW 27) Brand marks: Crystallume PVD and Crystallume are DIFFERENT brands (PVD/DLC vs diamond) — never interchange their names or marks.
+- (deep sweep, Mike 8/29) Print deliverables ship as complete printer-ready masters: fonts embedded, bleed, no background words clipped mid-letter, consistent treatment across parallel pieces.
+- (deep sweep, Mike 6/22–8/9) Technical line drawings follow drafting conventions: label leaders never cross lines, draft angles drawn the correct direction, reference the legacy drawings; saw ID is "Bore," not "collet." End-mill realism: flute runout = a 1–2"-radius wheel sweep; gash never rolls into the flute; land on the primary side; low concavity draws flat; all radii are CNC-ground (manual radius grinding no longer exists).

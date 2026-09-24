@@ -1,0 +1,3 @@
+- [Delta Roe website project](deltaroe-website-project.md) — full project history: plan artifact, build phases, vendor stack, imagery rules, next steps
+- [Takeover packet 7/29](status-2026-07-29-takeover-packet.md) — START HERE: Tamika taking ownership; knowledge moved into repo CLAUDE.md (now authoritative), owner commands + Takeover Guide shipped 70e8e73; transfer-day steps pending
+- [Launch state 7/21](status-2026-07-21-launch-state.md) - START HERE: everything shipped 7/13-7/21 (chakra audio, The Clearing game, intake system, Soulful Journey revision, owner's manual), Tamika's pending sign-off, launch checklist, house rules incl. gender-neutral voice

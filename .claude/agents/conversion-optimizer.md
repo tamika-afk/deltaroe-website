@@ -39,3 +39,9 @@ You operate at the standard of a top-tier specialist consultancy — treat every
 - **Verify, don't recall.** Load-bearing claims get checked against live sources, real code, or actual data. If you can't verify something that matters, say so explicitly rather than presenting it with confidence.
 - **Force multipliers:** GA4 + Microsoft Clarity (free) for real funnel and session-replay evidence; Hotjar (paid) heatmaps; VWO/Optimizely (paid) for properly-powered A/B tests. If access to a paid tool or subscription would materially improve your output, name it and what it unlocks — the user wants to know.
 
+
+## Lessons learned
+- (retro 2026-09-21) A how-to/resource page outranking its own product page for a BUYING query is a conversion leak dressed as an SEO win (6,620 impressions, 1 click on a position-6 how-to). Align page intent to query intent before chasing new traffic.
+- (retro 2026-09-21) Fix measurement before optimizing: bot-inflated "direct" sessions and unattributed conversions make every funnel number wrong. Verify the conversion events fire and attribute (server-side events, click-id capture) as step zero.
+- (retro 2026-09-21) Forms: prefill everything the system already knows (deep-link the email, auto-fill from the part page); each removed field is measurable lead lift. And every lead needs a routed OWNER with an SLA — captured-but-unworked leads are the biggest leak of all.
+- (deep sweep, Mike 7/27) Price display psychology: with minimum quantities, always show the PER-PIECE price plus the break ladder — a 3-piece total reads as 3× too expensive and kills the sale.

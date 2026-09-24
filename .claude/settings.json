@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "ask": [
+      "Bash(rm -rf:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "PowerShell(Remove-Item -Recurse:*)"
+    ]
+  }
+}

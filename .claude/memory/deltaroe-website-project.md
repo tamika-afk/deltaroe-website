@@ -1,0 +1,25 @@
+---
+name: deltaroe-website-project
+description: "Delta Roe (Tamika Banks' reiki/sound-bath studio, Elk Grove CA) website rebuild — plan approved artifact, brand = black+gold luxury boho from deltaroelogo.PNG, verified private-label vendor stack"
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: b3772bb8-2537-4956-9513-d7825105cfd2
+---
+
+New project (started 2026-07-08): major upgrade of deltaroe.com — Delta Roe, Tamika Banks' reiki / sound bath / chakra / life-coaching studio at 9075 Elk Grove Blvd Suite 220A, Elk Grove CA (currently Wix; 8 services $77–$250, Soulful Journey program $399/mo, Sound of Paint chakra event series, Sound-Integrated Self-Defense™ trademark).
+
+- **Goal:** dramatically increase revenue — online bookings, merch (zero-inventory private label), passive income, SEO + AI-search visibility.
+- **Logo:** `F:\Dropbox\deltaroelogo.PNG` (black + antique gold, lotus, chakra column, flower of life). Brand direction: luxury spa × bohemian; chakra colors used ceremonially only.
+- **Plan artifact:** https://claude.ai/code/artifact/3845574b-b345-47fd-b681-2ec5af1eaa89 (source in session scratchpad `deltaroe-upgrade-plan.html`).
+- **Recommended stack:** Next.js on Vercel + Square Appointments (booking) + Shopify Basic (shop — required because best-fit vendors Candle Builders & Enchanted Soul are Shopify-only) + Klaviyo.
+- **Verified vendor starter stack (July 2026):** Candle Builders (PL candles, $0 fees), Blanka (PL body/massage oils, zero MOQ), Enchanted Soul (crystals/sage/ritual kits blind dropship, Shopify Collective), Printful (apparel on Bella+Canvas/AS Colour). Add-ons: Dripshipper (PL tea, San Diego), Faire (net-60 wholesale for grounding sheets/orgonite), Get Grounded Shop affiliate. Grounding footwear = affiliate only (no wholesale programs exist).
+- **Build status (2026-07-08):** Site BUILT at `C:\dev\deltaroe-website` (registered in dashboard projects.json). Next.js 15, hand-rolled (no Tailwind), all-static: home, 5 service landing pages (`/services/[slug]` from `lib/services.ts`), events, soulful-journey, about, reviews, faq, gift-cards, corporate-wellness, shop (Apothecary "coming soon"), contact + sitemap/robots/llms.txt + LocalBusiness/Service/FAQPage schema. Booking CTAs point at existing Wix booking (deltaroe.com/book-online) until Square Appointments is set up. Logo emblem crop = `public/emblem.png` (wordmark-free, made via System.Drawing). Repo: https://github.com/monkeymike2023-web/deltaroe-website (created via GitHub API with git-credential token; no gh CLI on this machine).
+- **Deploy:** LIVE at https://deltaroe-website.vercel.app (user completed Vercel import 7/8; push-to-main now auto-deploys). Verified live: all pages, JSON-LD schema, llms.txt, sitemap (16 URLs), robots. Domain deltaroe.com still points at Wix until cutover.
+- **Photography (7/8):** Pexels-licensed imagery site-wide (service heroes, home strip); product labels composited via GDI+ script (`scratchpad/compose-labels.ps1` pattern — PS 5.1 needs [single] casts on Font/RectangleF ctors). IMPORTANT: Tamika is African American — never use stock imagery with visible skin that misrepresents her; no stock faces at all (hands-only OK, current about.jpg = Black woman's hands w/ candle, Pexels 18243181).
+- **Subscriptions (7/8):** /memberships page — Sanctuary Circle $33/mo virtual, Ritual Membership $129/mo studio, Soulful Journey $399/mo; Monthly Ritual Box $44/mo in shop demo. Founding-list CTAs via mailto until Square/Shopify subscriptions go live.
+- **Interactive layer (7/8):** "Roe" chatbot (client-side retrieval, `lib/roe-kb.ts`, voice = Tamika's books *FLY Queen: First Love Yourself* + *The Last Greyhound* — warm queen/self-love voice); 36-question FAQ w/ FAQPage schema (`lib/faqs.ts`); synthesized 60s 432Hz binaural bowl sample (`public/audio/sound-bath-sample.mp3`, numpy+ffmpeg) w/ custom ripple player on home + sound-bath pages; scroll-reveal motion system (MotionFx component). NOTE: don't run `npm run build` while the dev preview server is running — it corrupts .next (fix: stop server, rm -rf .next, restart).
+- **SESSION-END STATE (7/8, commit 35c4860):** All work committed & pushed; tree clean; live + verified at deltaroe-website.vercel.app. 7 commits total on main. Final touches: real logo (transparent PIL extractions `public/emblem-transparent.png`) composited onto product labels + tee (print sits below collar at rect 672,768,276,276 in compose script); 11/13 products photographed (hat + journal intentionally line-art — no faceless stock exists; Printful mockups will replace later); Apothecary in header nav; mala/pendant/tea photos added (SKU renamed "Hand-Strung Mala Beads" to match photo).
+- **Next steps:** Show Tamika the demo (collect feedback on prices/product names/tiers); Phase 1 free wins (GBP overhaul, review engine); Square booking; Shopify shop (Candle Builders + Blanka + Enchanted Soul + Printful); domain cutover to Vercel when Tamika approves. Chatbot upgrade path: swap KB retrieval for a real LLM endpoint later. Photo shoot of Tamika in-studio = biggest remaining visual upgrade.
+
+Related: [[trust-mode-working-style]]
