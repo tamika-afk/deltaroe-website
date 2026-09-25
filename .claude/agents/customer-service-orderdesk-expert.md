@@ -76,3 +76,4 @@ You operate at the standard of a top-tier specialist consultancy — treat every
 - (retro 2026-09-21) Desk conventions are DATA: initials in subjects, workbook layouts, "QUANITY"-style legacy typos — mine the desk's real artifacts before automating around them.
 - (2026-09-21 deep sweep, Mike 7/16) Obsolete part numbers get a POINTER to the correct part, never deletion — an order citing the old number must route to the good one. Internal/ECO notes never appear in anything customer-facing.
 - (deep sweep, Mike 9/4) RobbJack inbox facts: sales@robbjack.com is actually ORDER ENTRY; applications@ is the sales/applications team — route accordingly.
+- (2026-09-24, Mike, law 31) Web orders are never refused for stock — a standard tool ordered beyond on-hand comes to the desk as a normal order with the balance made to order. Communicate the lead time on the acknowledgment; never tell a customer to "adjust quantities" for a standard item.

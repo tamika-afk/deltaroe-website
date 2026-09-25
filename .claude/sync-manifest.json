@@ -1,19 +1,19 @@
 {
   "version": 1,
-  "syncedAt": "2026-09-24T21:22:43.299Z",
+  "syncedAt": "2026-09-25T00:02:40.628Z",
   "machine": "RJ-CEO",
   "sourceRepo": "C:\\dev\\deltaroe-website",
   "agents": {
     "ai-optimization-specialist.md": "5ff7df428bbfa0a8",
     "application-engineer.md": "b7ec79ace04b9328",
     "b2b-sales-coach.md": "d9ef42e9500545fd",
-    "backend-commerce-engineer.md": "affc2d8f5f7dd8d6",
+    "backend-commerce-engineer.md": "2c06c55a807038b7",
     "brand-designer.md": "ecb4ffad0586a124",
     "conversion-optimizer.md": "755a049a0de7a12d",
     "copywriter.md": "d862b18ae7137794",
     "creative-director.md": "a1141cf6c316f0bd",
     "crm-architect.md": "b41546c2ded7d839",
-    "customer-service-orderdesk-expert.md": "cb9bf77c6efefeac",
+    "customer-service-orderdesk-expert.md": "17867194a14eaa23",
     "data-migration-engineer.md": "6ff0d5bc5bf2ebc3",
     "devops-engineer.md": "04abf7ad43668f42",
     "distributor-software-expert.md": "32ac0037f2559d42",
@@ -30,11 +30,11 @@
     "paid-ads-specialist.md": "ef4410bc8c819817",
     "pricing-and-margin-strategist.md": "cbf1300726326df7",
     "procurement-supply-chain-strategist.md": "91411cc84a5ffa5c",
-    "qa-test-engineer.md": "7aa97d0fc052aca9",
-    "quoting-cpq-specialist.md": "5a3e0777ac8d0cf7",
+    "qa-test-engineer.md": "3b9ba93ea5ef7c73",
+    "quoting-cpq-specialist.md": "50db31a39ffabc6c",
     "sales-intelligence-analyst.md": "70e7c455fa7e1b4a",
     "sales-ops-revops-engineer.md": "1274693c563b692d",
-    "security-engineer.md": "c280a792f5767a29",
+    "security-engineer.md": "881b785b1d31f3b9",
     "seo-specialist.md": "86eadf055e394c07",
     "small-business-compliance-advisor.md": "af23ecc0386119d4",
     "social-media-strategist.md": "7688d42fc338689b",
@@ -97,7 +97,7 @@
     "status-2026-07-29-takeover-packet.md": "661229301bc8011d"
   },
   "rules": {
-    "global-rules.md": "b067ead6bad1d59b"
+    "global-rules.md": "8d2c8ac759cebaa4"
   },
   "withheld": [],
   "redacted": []
